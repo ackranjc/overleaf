@@ -1,0 +1,20 @@
+% Ch2LiteratureReview.tex
+
+\chapter[Literature Review]{Literature Review}
+\label{cha:cha2LiteratureReview}
+
+Real-time systems are those in which timeliness is as important as logic correctness. Missing a deadline will result in a degradation of system performance for soft real-time systems or a system failure for
+hard real-time systems. The requirements for real-time system design have been extensively described in a large number of papers as well as in many books. 
+
+As a class of real-time systems, real-time and embedded control systems have been increasingly deployed in various applications. As outlined in Chapter \ref{cha:cha1Introduction}, with the focus on dynamics analysis and integrated design, this thesis will address three related areas of real-time control:
+\begin{itemize} 
+\parskip=0\baselineskip
+\item Control design for controllers: Well designed control strategies are essential for real-time control systems to provide the desired functionality. For complex processes that cannot be well handled using either simple Proportional-Integral-Derivative (PID) control or advanced model-based control, integrated design of model-free and intelligent control is an attractive way for process operation. 
+
+\item Control implementation on controllers in multi-tasking environments: Real-time control systems are typically deployed in hardware platforms with limited resources, e.g., uni-processor, resulting in various constraints in computing and scheduling of real-time control tasks of the systems. While schedulability has been the focus of conventional scheduling theory, it is not enough for real-time control systems. We need good control performance as well! In order to meet the requirements of both control performance and multi-tasking schedulability, well-designed scheduling of multiple real-time control tasks becomes critical for these systems. 
+
+\item Control design and its implementation on controllers in networked environments: Challenges exist when a real-time control system in implemented over networks. A better understanding of the dynamics of networked control is necessary for further improvement of system performance. As separate designs of control, scheduling, and networks do not provide optimal solutions to a networked control system (NCS), an integrated design of various system components is thus crucial for maximising the system performance. 
+\end{itemize}
+%
+
+Real-time systems are a vast field, so are control systems. Computer networks, which are essential for networked control, are also a very broad area. This marks the interdisciplinary nature of this research. 

@@ -1,0 +1,1116 @@
+
+\documentclass[a4paper, 12pt]{book}
+
+\usepackage[utf8x]{inputenc}   % omogoča uporabo slovenskih črk kodiranih v formatu UTF-8
+\usepackage[slovene,english]{babel}    % naloži, med drugim, slovenske delilne vzorce
+\usepackage[pdftex]{graphicx}  % omogoča vlaganje slik različnih formatov
+\usepackage{fancyhdr}          % poskrbi, na primer, za glave strani
+\usepackage{amssymb}           % dodatni simboli
+\usepackage{amsmath}           % eqref, npr.
+%\usepackage{hyperxmp}
+\usepackage[pdftex, colorlinks=true,
+						citecolor=black, filecolor=black, 
+						linkcolor=black, urlcolor=black,
+						pagebackref=false, 
+						pdfproducer={LaTeX}, pdfcreator={LaTeX}, hidelinks]{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	DIPLOMA INFO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\ttitle}{Digitalno samozaložništvo}
+\newcommand{\ttitleEn}{Digital selfpublishing}
+\newcommand{\tsubject}{\ttitle}
+\newcommand{\tsubjectEn}{\ttitleEn}
+\newcommand{\tauthor}{Aljaž Kranjc}
+\newcommand{\tkeywords}{Digitalno samozaložništvo, založništvo, e-knjiga}
+\newcommand{\tkeywordsEn}{Digital selfpublishing, publishing, e-book}
+
+
+
+\usepackage{hyperref}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	HYPERREF SETUP
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{pdftitle={\ttitle}}
+\hypersetup{pdfsubject=\ttitleEn}
+\hypersetup{pdfauthor={\tauthor, ackranjc@gmail.com}}
+\hypersetup{pdfkeywords=\tkeywordsEn}
+
+
+ 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% postavitev strani
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+
+\addtolength{\marginparwidth}{-20pt} % robovi za tisk
+\addtolength{\oddsidemargin}{40pt}
+\addtolength{\evensidemargin}{-40pt}
+
+\renewcommand{\baselinestretch}{1.3} % ustrezen razmik med vrsticami
+\setlength{\headheight}{15pt}        % potreben prostor na vrhu
+\renewcommand{\chaptermark}[1]%
+{\markboth{\MakeUppercase{\thechapter.\ #1}}{}} \renewcommand{\sectionmark}[1]%
+{\markright{\MakeUppercase{\thesection.\ #1}}} \renewcommand{\headrulewidth}{0.5pt} \renewcommand{\footrulewidth}{0pt}
+\fancyhf{}
+\fancyhead[LE,RO]{\sl \thepage} \fancyhead[LO]{\sl \rightmark} \fancyhead[RE]{\sl \leftmark}
+
+
+
+\newcommand{\BibTeX}{{\sc Bib}\TeX}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% naslovi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+
+
+\newcommand{\autfont}{\Large}
+\newcommand{\titfont}{\LARGE\bf}
+\newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
+\setcounter{tocdepth}{1}	      % globina kazala
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% konstrukti
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\newtheorem{izrek}{Izrek}[chapter]
+\newtheorem{trditev}{Trditev}[izrek]
+\newenvironment{dokaz}{\emph{Dokaz.}\ }{\hspace{\fill}{$\Box$}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PDF-A
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% define medatata
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\def\Title{\ttitle}
+\def\Author{\tauthor, matjaz.kralj@fri.uni-lj.si}
+\def\Subject{\ttitleEn}
+\def\Keywords{\tkeywordsEn}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% \convertDate converts D:20080419103507+02'00' to 2008-04-19T10:35:07+02:00
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\def\convertDate{%
+    \getYear
+}
+
+{\catcode`\D=12
+ \gdef\getYear D:#1#2#3#4{\edef\xYear{#1#2#3#4}\getMonth}
+}
+\def\getMonth#1#2{\edef\xMonth{#1#2}\getDay}
+\def\getDay#1#2{\edef\xDay{#1#2}\getHour}
+\def\getHour#1#2{\edef\xHour{#1#2}\getMin}
+\def\getMin#1#2{\edef\xMin{#1#2}\getSec}
+\def\getSec#1#2{\edef\xSec{#1#2}\getTZh}
+\def\getTZh +#1#2{\edef\xTZh{#1#2}\getTZm}
+\def\getTZm '#1#2'{%
+    \edef\xTZm{#1#2}%
+    \edef\convDate{\xYear-\xMonth-\xDay T\xHour:\xMin:\xSec+\xTZh:\xTZm}%
+}
+
+%\expandafter\convertDate\pdfcreationdate 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% get pdftex version string
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\newcount\countA
+\countA=\pdftexversion
+\advance \countA by -100
+\def\pdftexVersionStr{pdfTeX-1.\the\countA.\pdftexrevision}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% XMP data
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\usepackage{xmpincl}
+%\includexmp{pdfa-1b}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% pdfInfo
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\pdfinfo{%
+    /Title    (\ttitle)
+    /Author   (\tauthor, damjan@cvetan.si)
+    /Subject  (\ttitleEn)
+    /Keywords (\tkeywordsEn)
+    /ModDate  (\pdfcreationdate)
+    /Trapped  /False
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\selectlanguage{slovene}
+\frontmatter
+\setcounter{page}{1} %
+\renewcommand{\thepage}{}       % preprecimo težave s številkami strani v kazalu
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%naslovnica
+ \thispagestyle{empty}%
+   \begin{center}
+    {\large\sc Univerza v Ljubljani\\%
+      Fakulteta za računalništvo in informatiko}%
+    \vskip 10em%
+    {\autfont \tauthor\par}%
+    {\titfont \ttitle \par}%
+    {\vskip 2em \textsc{DIPLOMSKO DELO\\[2mm]
+    VISOKOŠOLSKI STROKOVNI ŠTUDIJSKI PROGRAM PRVE STOPNJE RAČUNALNIŠTVO IN INFORMATIKA}\par}%
+    \vfill\null%
+    {\large \textsc{Mentor}: doc.\ dr.  Matjaž Kukar\par}%
+    {\vskip 2em \large Ljubljana, 2016 \par}%
+\end{center}
+% prazna stran
+\clearemptydoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%copyright stran
+\thispagestyle{empty}
+\vspace*{8cm}
+Fakulteta za računalništvo in informatiko podpira javno dostopnost znanstvenih, strokovnih in razvojnih rezultatov. Zato priporoča objavo dela pod katero od licenc, ki omogočajo prosto razširjanje diplomskega dela in/ali možnost nadaljne proste uporabe dela. Ena izmed možnosti je izdaja diplomskega dela pod katero od Creative Commons licenc \href{http://creativecommons.si}{http://creativecommons.si}
+
+Morebitno pripadajočo programsko kodo praviloma objavite pod, denimo, licenco 
+\emph{GNU General Public License, različica 3}. Podrobnosti licence so dostopne na spletni strani \href{http://www.gnu.org/licenses/}{http://www.gnu.org/licenses/}.
+
+\begin{center}
+	\mbox{}\vfill
+	\emph{Besedilo je oblikovano z urejevalnikom besedil \LaTeX.}
+\end{center}
+% prazna stran
+\clearemptydoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% stran 3 med uvodnimi listi
+\thispagestyle{empty}
+\vspace*{4cm}
+
+\noindent
+Fakulteta za računalništvo in informatiko izdaja naslednjo nalogo:
+\medskip
+\begin{tabbing}
+	\hspace{32mm}\= \hspace{6cm} \= \kill
+	
+	
+	
+	
+	Digitalno samozaložništvo:
+\end{tabbing}
+
+ŠE POTREBNO NARESTI! 
+
+Besedilo teme diplomskega dela študent prepiše iz študijskega informacijskega sistema, kamor ga je vnesel mentor. V nekaj stavkih bo opisal, kaj pričakuje od kandidatovega diplomskega dela. Kaj so cilji, kakšne metode uporabiti, morda bo zapisal tudi ključno literaturo.
+\vspace{15mm}
+
+
+
+
+
+
+\vspace{2cm}
+
+% prazna stran
+\clearemptydoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% izjava o avtorstvu
+\vspace*{1cm}
+\begin{center}
+	{\Large \textbf{\sc Izjava o avtorstvu diplomskega dela}}
+\end{center}
+
+\vspace{1cm}
+\noindent Spodaj podpisani Aljaž Kranjc sem avtor diplomskega dela z naslovom:
+
+\vspace{0.5cm}
+\emph{Digitalno samozaložništvo}\hspace{5mm}(angl. \emph{Digital selfpublishing})
+
+\vspace{1.5cm}
+\noindent S svojim podpisom zagotavljam, da:
+\begin{itemize}
+	\item sem diplomsko delo izdelal samostojno pod mentorstvom
+	doc.\ dr.\ Matjaža Kukarja,
+	
+	\item	so elektronska oblika diplomskega dela, naslov (slov., angl.), povzetek (slov., angl.) ter ključne besede (slov., angl.) identični s tiskano obliko diplomskega dela,
+	\item soglašam z javno objavo elektronske oblike diplomskega dela na svetovnem spletu preko univerzitetnega spletnega arhiva.	
+\end{itemize}
+
+\vspace{1cm}
+\noindent V Ljubljani, dne 4. januarja 2016 \hfill Podpis avtorja:
+
+% prazna stran
+\clearemptydoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% kazalo
+\pagestyle{empty}
+\def\thepage{}% preprecimo tezave s stevilkami strani v kazalu
+\tableofcontents{}
+
+
+
+
+% prazna stran
+\clearemptydoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% povzetek
+\addcontentsline{toc}{chapter}{Povzetek}
+\chapter*{Povzetek}
+
+\noindent\textbf{Naslov:} Digitalno samozaložništvo
+\bigskip
+
+%\noindent\textbf{Povzetek:} 
+\noindent Digitalno založništvo (znano tudi kot e-založništvo ali elektronsko založništvo) zajema digitalno publikacijo e-knjig, digitalnih revij in razvoj digitalnih knjižnic in katalogov. Postalo je nekaj običajnega, da se knjige, revije in časopise distribuira bralcem preko tabličnih bralnih naprav. Tržne raziskave kažejo, da bo do konca leta 2015 polovica vseh revij in časopisov v obtoku preko digitalne dostave, prav tako bo bila polovica vsega branja v ZDA potekala brez papirja. Naše publikacije lahko ustvarimo z številnimi zastonjskimi spletnimi orodji, ki se razlikujejo po namenu glede na našo vsebino. Končane publikacije lahko potem objavimo in tržimo preko raznih založniških platform.
+\bigskip
+
+\noindent\textbf{Ključne besede:} \tkeywords.
+% prazna stran
+\clearemptydoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% abstract
+\selectlanguage{english}
+\addcontentsline{toc}{chapter}{Abstract}
+\chapter*{Abstract}
+
+\noindent\textbf{Title:} Digital selfpublishing
+\bigskip
+
+%\noindent\textbf{Abstract:} 
+\noindent Electronic publishing (also referred to as e-publishing or digital publishing) includes the digital publication of e-books, digital magazines, and the development of digital libraries and catalogues. Market research suggests that half of all magazine and newspaper circulation will be via digital delivery by the end of 2015 and that half of all reading in the United States will be done without paper by 2015. We can create our publications with a number of free online tools that differ on their purpose based on our content. We can publish and sell our finished publications via various publishing platforms.
+\bigskip
+
+\noindent\textbf{Keywords:} \tkeywordsEn.
+\selectlanguage{slovene}
+% prazna stran
+\clearemptydoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\mainmatter
+\setcounter{page}{1}
+\pagestyle{fancy}
+
+\chapter{Uvod}
+Z napredkom tehnologije in lažjo dostopnostjo do pametnih telefonov, tablic in namenskih bralnikov se spreminja tudi način kako si zamišljamo branje. Postalo je nekaj običajnega, da se knjige, revije in časopise distribuira bralcem preko tabličnih bralnih naprav. Tržne raziskave kažejo, da bo do konca leta 2015 polovica vseh revij in časopisov v obtoku preko digitalne dostave,\cite{2} prav tako bo bila polovica vsega branja v ZDA potekala brez papirja.\cite{3}
+
+Cilj diplomske naloge je podrobno opisati digitalno samozaložništvo, s poudarkom na bolj tehničnih profilov avtorjev in publike. V prvem poglavju je digitalno založništvo opisano bolj nas plošno. Poglavje opisuje proces digitalnega samozaložništva, e-knjige in namenske bralnike ter tudi vprašanja glede avtorskih pravic. Naslednje poglavje Platforme za trženje opisuje platforme preko katerih lahko tržimo naš izdelek prek spleta kot avtor samozaložnik. Poglavje bolj podrobno opisuje 3 velike in različne platformi za trženje naših e-knjig – Amazon KDP, Smashwords in Gumroad, ter jih med seboj primerja. V poglavju Orodja za digitalno samozaložništvo so predstavljena orodja, s katerimi si avtor lahko pomaga pri svojem procesu izdelave digitalnega izdelka. Bolj podrobno so opisana tri orodja, Google Dokumenti, Preglednice in Diapozitivi , Overleaf in Wordpress. Poglavje poskuša orodja ovrednotiti in razložiti, katera orodja so namenjena za kakšno vsebino.
+
+
+
+
+\chapter{Digitalno samozaložništvo}
+\label{Dig_samozaloznistvo}
+Digitalno založništvo (znano tudi kot e-založništvo ali elektronsko založništvo) zajema digitalno publikacijo e-knjig, digitalnih revij in razvoj digitalnih knjižnic in katalogov. Digitalno založništvo je postalo običajno tudi v znanstvenem založništvu kjer je rečeno, da bo recenzirane znanstvene revije počasi zamenjalo elektronsko založništvo. Postalo je nekaj običajnega, da se knjige, revije in časopise distribuira bralcem preko tabličnih bralnih naprav. To tržišče raste vsako leto za milijone preko spletnih prodajalcev kot so Applova iTunes knjigarna, Amazonova knjigarna za Kindle in knjige v Googlovi Play knjigarni.\cite{1} Tržne raziskave kažejo, da bo do konca leta 2015 polovica vseh revij in časopisov v obtoku preko digitalne dostave,\cite{2} prav tako bo bila polovica vsega branja v ZDA potekala brez papirja.\cite{3} Čeprav je distribucija prek interneta (znan tudi kot spletno založništvo ali založništvo na spletu, ko je v obliki spletne strani) danes močno povezana z elektronskim založništvom, obstaja veliko nemrežnih elektronskih publikacij, kot so enciklopedije na CD-ju in DVD-ju, kot tudi tehnično in referenčne publikacije, na katere se zanašajo mobilni uporabniki in drugi brez zanesljivega in visoke hitrostnega dostopa do omrežja. Elektronsko založništvo se uporablja tudi na področju priprava na testiranje v razvitih, kot tudi v gospodarstvih v razvoju za izobraževanje učencev (torej delno nadomešča konvencionalne knjige), zato ker omogoča kombinacijo vsebine in analitike. Uporaba elektronskega založništva za učbenike bo lahko postala bolj razširjena z iBooks Apple Inc. in z Applovimi pogajanji s tremi največjimi dobavitelji učbenikov v ZDA.\cite{4} Elektronsko založništvo je vse bolj priljubljena v leposlovnih delih, kot tudi pri znanstvenih člankih ~\ref{akademsko_z}. Elektronske založniki so zmožni ugoditi večernim bralcem, zagotoviti knjige, ki jih stranke ne bi mogli najti pri standardnih knjižnih trgovcih (erotika je še posebej priljubljena v formatu e-knjige) in knjige novih avtorjev, ki verjetno ne bi bile donosne za tradicionalne založbe. Medtem ko se izraz "elektronsko založništvo" danes uporablja, da se nanaša na trenutno ponudbo spletnih in spletnih založnikov, ima izraz zgodovino, da se uporablja tudi za opis razvoja novih oblik proizvodnje, distribucije in interakcijo uporabnikov z proizvodnjo, ki temelji na računalniških besedilih in drugih interaktivnih medijih. 
+
+\section{Proces digitalnega založništva}
+Proces digitalnega založništva sledi tradicionalnemu proces založništva,\cite{5} vendar se razlikuje od tradicionalnega založništva na dva načina: 
+\begin{enumerate}
+	\item Ne vključujejo uporabe ofsetnega tiskarskega stroja za tiskanje končnega izdelka.
+	\item Izogiba se distribuciji fizičnega proizvoda.
+\end{enumerate}
+Ker je vsebina elektronska, se lahko distribuira preko interneta in preko elektronskih knjigarn. Potrošnik lahko prebere objavljene vsebine na spletni strani, v aplikaciji na tablični napravi, ali pa v formatu PDF na računalniku. V nekaterih primerih si lahko bralec natisnet vsebino z brizgalnimi ali laserski tiskalniki, lahko pa prek tiska na zahtevo. 
+
+Elektronska distribucijo vsebin v obliki aplikacij je postala priljubljena zaradi hitrega sprejetja pametnih telefonov in tablet med potrošniki. Sprva so bile potrebne domorodne aplikacije za vsako mobilno platformo, da dosežejo vse občinstvo, vendar v prizadevanju proti univerzalni združljivosti naprav, se je pozornost preusmerila v uporabo HTML5 za ustvarjanje spletnih aplikacij, ki lahko delujejo na kateremkoli brskalniku. 
+
+Korist elektronskega založništva prihaja z uporabo treh atributov digitalne tehnologije: XML oznake za opredelitev vsebine,\cite{6} slogi za opredelitev videza vsebine in metapodatkov za opis vsebine za iskalnike. Z uporabo oznak, slogov in metapodatkov, kar omogoča pretočno vsebino, ki se prilagaja različnim bralnim napravam ali načinom dostave. 
+
+Ker elektronsko založništvo pogosto zahteva besedilno označbo za razvoj spletnih načinov dobave so se tradicionalne vloge tipkarjev in knjižnih oblikovalcev spremenile. Oblikovalci morajo vedeti več o označevalnih jezikih, različnih bralnih naprav, ki na voljo, in načine, na katere potrošniki berejo. Na voljo postaja tudi nova razvojna programska oprema za razvijalce, da objavljajo vsebine v tem standardu ne da bi morali znati programirati, kot so Adobe Systems 'Digital Publishing Suite in Apple iBooks Author. Najpogostejši format datoteke je .epub, ki se uporablja v številnih oblikah, e-knjige, ki je svoboden in odprt standard, na voljo v mnogih programih za založništvo. Druga pogosta oblika je .folio, ki ga uporablja Adobe Digital Publishing Suite za ustvarjanje aplikacij in vsebin na Apple iPad tabletah. 
+
+\section{E-knjiga}
+\label{eknjiga}
+Elektronska knjiga (e-knjiga, eKnjiga, e-Knjiga, ebook, digitalna knjiga ali e-izdaja) je knjižna publikacija v digitalni obliki, ki je sestavljena iz besedila in slik, berljiva pa je na računalnikih in drugih elektronskih naprav \cite{7}. Čeprav včasih opredeljena kot "elektronska različica tiskane knjige" \cite{8}, obstaja veliko e-knjig brez tiskanega ekvivalenta. Komercialno proizvedene in prodajane e-knjige so običajno namenjena branju na namenskih e-bralnikih. Vendar pa se lahko skoraj vsak prefinjena elektronska naprava, ki ima nastavljivi zaslon uporablja tudi za branje e-knjig, vključno z računalniki, tablicami in pametnimi telefoni.
+
+Branje e-knjig se povečuje v ZDA; do leta 2014 je 28\% odraslih bralo e-knjige, v primerjavi z 23\% v letu 2013. Zaradi dostopnosti bralnih naprav se branje e-knjig povečuje, 50\% ameriških odraslih je do leta 2014 imelo namensko napravo (bodisi e-bralnik ali tablični računalnik), v primerjavi z le 30\% v koncu leta 2013. \cite{9} 
+
+\subsection{Formati e-knjig}
+\label{eknjiga_formati}
+Ko so se formati e-knjig začeli pojavljati in razmnoževati, so nekatere pridobile podporo velikih podjetij programske opreme, kot so Adobe s svojim PDF formatom, drugi pa s strani neodvisnih in odprto-kodnih programerjev. Različni e-bralniki uporabljajo različne formate, večina od njih so specializirane samo v enega, kar posledično razdeljuje in lomi trg. Zaradi ekskluzivnosti in omejene branosti e-knjig, zlomljenega trga ni bilo soglasja glede standarda za pakiranje in prodajo e-knjig. 
+
+V poznih 1990-ih je bil oblikovan konzorcij za razvoj formata Open eBook (odprta eKnjiga), kot način za avtorje in založnike, da zagotovi enoten izvoren dokument, katerega bi podpirale številne  programske in strojne platforme za branje knjig. Open eBook je za delovanje zahteval podskupine XHTML in CSS; nabor multimedijskih formatov (ostali se lahko uporabijo, vendar pa mora biti tudi alternativna v enem od zahtevanih formatov) in XML shema za "manifest", da navede komponente dane e-knjige, prepozna kazalo, naslovnico itd. Ta format je privedel do odprtega formata ePUB. Google Knjige je pretvoril veliko javno dostopnih del v ta odprti formata. \cite{10}
+
+V letu 2010 so e-knjige še naprej rasle v svojih podzemnih trgih. Veliko založb e-knjig je začelo distribucijo javno domenskih knjig. Hkrati so avtorji knjig, ki niso bile sprejete s strani založnikov,  ponudili svoja dela na spletu, tako da bi jih videli drugi. Neuradni (in občasno nepooblaščeni) katalogi knjig so bili na voljo na spletu, tudi nekatere spletne strani namenjene e-knjigam, so začela razširjati informacije e-knjig javnosti. \cite{11} Skoraj dve tretjini potrošniškega založniškega trga e-knjig ZDA, je v lasti "Velike Peterice". Med založnike "Velike Peterica" spadajo:. Hachette, HarperCollins, Macmillan, Penguin Random House in Simon \& Schuster \cite{12}
+
+\subsection{Knjižnice}
+\label{eknjiga_knjiznice}
+Knjižnice v ZDA so začele zagotavljati brezplačne e-knjig za javnost v letu 1998 prek svojih spletnih strani in z njimi povezanimi storitvami, \cite{13} čeprav so bile e-knjige predvsem znanstvene, tehnične ali poklicne narave in je ni mogoče prenesti. V letu 2003 so knjižnice začele ponujati brezplačno prenosljive priljubljene e-knjige za javnost, kar je sprožilo posojilni model za e-knjige, ki je bolj veliko uspešen za javne knjižnice. \cite{14} Število knjižničnih distributerjev e-knjig in posojilnih modelov se je še naprej povečevalo v naslednjih nekaj letih. Od 2005 do 2008 knjižnic doživela 60\% rast v e-knjižnih zbirk. \cite{15} Leta 2010 je raziskava o financiranju javnih knjižni in tehnologiji dostopa \cite{16}  pokazala, da je 66\% javnih knjižnic v ZDA ponujalo e-knjige \cite{17} in veliko gibanje v knjižnici industriji je začela resno preučevati vprašanja, povezana s posojanjem e-knjig, kar potrjuje obdobje široke uporabe e-knjige. \cite{18} Vendar pa nekateri založniki in avtorji niso podprli koncept elektronskega založništva zaradi težav s povpraševanjem, piratstvom in lastniškimi napravami. \cite{19} V raziskavi medknjižničnih posojilnih knjižničarjev je bilo ugotovljeno, da je 92\% knjižnic vključevalo e-knjige v svojih zbirkah, 27\% od teh knjižnic pa se je pogajalo glede medknjižničnih posojilnih pravic za nekatere od svojih e-knjig. Ta raziskava je pokazala velike ovire za opravljanje medknjižnične izposoje e-knjig. \cite{20} Pridobitev z povpraševanjem (Demand-driven acquisition - DDA), ki se je uporabljala že nekaj let v javnih knjižnicah in omogoča prodajalcu racionalizirati postopek pridobivanja e-knjig, tako da, se profil izbora v knjižnicah ujema z prodajalčevimi e-knjigami. \cite{21} Katalog knjižnice se nato napolni z zapisi vseh e-knjig v, ki ustrezajo vašemu profilu. \cite{21} Odločitev o nakupu naslova je prepuščena pokroviteljem, čeprav knjižnica lahko določi nabavne pogoje, kot je najvišja cena in limit nakupa, tako da so porabe sredstev v skladu s proračunom knjižnice. \cite{21}
+
+Čeprav se je povpraševanje po e-knjigah in njenih storitvah v knjižnicah povečalo, težave preprečujejo knjižnicam zagotavljanje e-knjig. \cite{22} Založniki bodo prodajali e-knjige knjižnicam, vendar imajo v večini primerov le omejeno licenco za knjige. To pomeni, da knjižnica ni lastnik elektronskega besedila, ampak da lahko kroži za določen čas, določeno količino izposoj ali pa mešanica obojega. Ko knjižnica kupi licenco e-knjige je strošek trikrat večji od tega, ki bi bil za osebnega potrošnika. \cite{22}
+
+\subsection{Namenski bralniki in mobilna programska oprema}
+\label{eknjiga_namenskiBralniki}
+E-bralnik, ki se imenuje tudi bralnik e-knjige in e-knjižna naprava, je mobilna elektronska naprava, ki je namenjen predvsem za branje e-knjig in digitalnih revij. E-bralnik je po obliki podoben tablicam, vendar ima bolj omejen namen. Mnogi e-bralniki so boljši od tablet za branje, ker so bolj prenosni, imajo boljšo berljivost pri sončni svetlobi in imajo daljšo življenjsko dobo baterije. \cite{23}
+Obstaja že nekaj generacij namenskih e-bralnikov. Rocket eBook \cite{24} in številne drugi so bile uvedeni že leta 1998, vendar niso bili splošno sprejeti. Ustanovitev E Ink Corporation je leta 1997 pripeljalo do razvoja tehnologije elektronskega papirja, ki omogoča zaslonu, da odbija svetlobo kot navaden papir, brez potrebe po osvetlitvi; elektronski papir je bila vključena najprej v Sony Librie (izšel leta 2004) in Sony Reader (2006), sledila mu je naprava Amazon Kindle, ki je bila po svoji izdaji leta 2007 razprodana v petih urah. 
+
+Od leta 2009, so se razvili novi tržni modeli za e-knjige in izdelane so bile nove generacije bralnih naprav. E-knjige (v nasprotju z e-bralniki) še niso dosegle globalne distribucije. V Združenih državah Amerike, sta bila septembra 2009 prevladujoči naprave za e-branje Amazon Kindle in Sony PRS-500. \cite{25}
+27. januarja 2010 je Apple Inc. izdal več-funkcijsko napravo imenovan iPad \cite{26} in sklenil sporazume s petimi od šestih največjih založnikov, ki bi omogočili Applu distribucijo e-knjig. \cite{27} Naprava iPad vključuje vgrajene aplikacije za e-knjige imenovane iBooks in iBookstore. IPadu, ki je bila prva komercialna donosna tablica, je leta 2011 sledila sprostitev prvih tablet, ki temeljijo na Androidu, kot tudi LCD različicami naprav Nook in Kindle; za razliko od prejšnjih namenskih e-bralnikov so tablični računalniki več-funkcijski, uporabljajo LCD zaslone (in ponavadi zaslon na dotik), in (kot iOS in Android) in omogočajo vgradnjo aplikacij ostalih ponudnikov e-knjig. Rast uporabe splošno namenskih tablic je omogočalo nadaljnjo rast v priljubljenosti e-knjig.
+
+V Kanadi je roman Sentimentalnež osvojil prestižno nacionalno Gillerjevo nagrado. Zaradi majhnega obsega romana neodvisne založbe, knjiga ni bila splošno na voljo v tiskani obliki, e-knjižna izdaja pa je postala uspešnica na Kobo napravah v letu 2010. \cite{28}
+
+Do konca leta 2013, uporaba e-bralnikov ni bila dovoljeno na letalih med vzletom in pristankom. \cite{29} V novembru 2013 je FAA dovolilo uporabo e-bralnikov na letalih ves čas, če je v letalskem načinu, (kar pomeni, da je radio izklopljen) Evropa je tem smernicam sledila v naslednjem mesecu. \cite{30} Leta 2014 je New York Times je napovedal, da bodo do leta 2018 e-knjige predstavljale več kot 50\% celotnih prihodkov potrošnikov založništva v ZDA in Veliki Britaniji. \cite{31}
+
+\paragraph{Aplikacije za e-bralnike}
+Nekateri od glavnih knjižnih trgovcev in neodvisnih razvijalcev ponujajo brezplačne (in v nekaterih primerih plačljive) aplikacije e-bralnikov za Mac in PC računalnike, kot tudi za Android, Blackberry, iPad, iPhone, Windows Phone in Palm OS naprave, ki omogočajo branje e-knjig in drugih dokumentov neodvisno od namenskih naprav za e-knjige. Primeri so aplikacije za Amazon Kindle, Barnes \& Noble Nook, Kobo eReader in Sony Reader. 
+
+\subsection{Formati}
+\label{eknjiga_formati}
+Pisatelji in založniki imajo na voljo številne formate v katerih lahko objavijo e-knjige. Vsaka oblika ima svoje prednosti in slabosti.
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{ |p{5.5cm} | p{7.5cm}| }
+			\hline
+			\multicolumn{1}{|c|}{\textbf{E-bralniki}} & \multicolumn{1}{|c|}{\textbf{Izvorno podprti formati e-knjige}} \\ \hline
+			Amazon Kindle in Fire tablice\cite{33} & AZW, AZW3, KF8, non-DRM MOBI, PDF, PRC, TXT \\ \hline
+			Barnes \& Noble Nook in Nook Tablica\cite{34} & EPUB, PDF \\  \hline
+			Apple iPad\cite{35} & EPUB, IBA (Multitouch knjige narejene z iBooks Author), PDF \\ \hline
+			Sony Reader\cite{33} & EPUB, PDF, TXT, RTF, DOC, BBeB \\ \hline
+			Kobo eReader in Kobo Arc\cite{36}\cite{37} & EPUB, PDF, TXT, RTF, HTML, CBR (strip), CBZ (strip) \\ \hline
+			PocketBook Reader in PocketBook Touch\cite{38}\cite{39} & EPUB DRM, EPUB, PDF DRM, PDF, FB2, FB2.ZIP, TXT, DJVU, HTM, HTML, DOC, DOCX, RTF, CHM, TCR, PRC (MOBI) \\
+			\hline
+		\end{tabular}
+	\end{center}
+		\caption{Najbolj priljubljeni e-braniki \cite{32} in njihovi izvorno podprti formati.}
+		\label{tbl:bralniki}
+\end{table}
+
+\section{Akademsko založništvo}
+\label{akademsko_z}
+Ko je članek predložen akademski reviji za obravnavo, lahko pride do zakasnitve preden je objavljen v reviji, ki lahko traja od nekaj mesecev do več kot dve leti \cite{40}, zaradi česar so revije manj kot idealno oblika za širjenje trenutnih raziskav. Na nekaterih področjih, kot so astronomija in nekaterih delih fizike, je bila vloga revije pri razširjanju najnovejših raziskav v veliki meri nadomeščeno z predodtisnimi repozitoriji kot je arXiv.org. Vendar revije še vedno igrajo pomembno vlogo pri nadzoru kakovosti ter o ustanovitvi znanstvenih zaslug. V mnogih primerih so elektronske materiale, naložene v predodtisne repozitorije še vedno namenjena za morebitno objavo v reviji.
+
+Obstajajo statistični dokazi, da elektronsko založništvo zagotavlja širše razširjanje. \cite{41} Številne revije so vzpostavile elektronske različice ali se celo v celoti preselila v elektronski izdajo, še vedno pa ohranjajo strokovno recenzijo.
+
+\subsection{Digitalno založništvo in avtorske pravice}
+Zakoni o avtorskih pravicah so trenutno prilagojeni tiskanim knjigam. Digitalno založništvo prinaša nova vprašanja v zvezi z avtorskimi pravicami. E-založništvo je lahko bolj kolaborativno in pogosto vključujejo več kot enega avtorja in  je tudi bolj dostopna, saj je objavljena na spletu. To odpira več vrat za plagiatorstvo ali kraje.\cite{42}
+
+Nekateri založniki se trudijo, da bi to spremenili. Na primer, HarperCollins je omejil število sposoj, ki jih ima ena od njihovih e-knjig v javni knjižnici.\cite{43} Drugi, kot so Penguin, poskušajo namesto tega vključiti elemente e-knjige v svoje publikacije. 
+
+\chapter{Platforme za trženje}
+\label{platforme}
+
+\section{Amazon KDP}
+Kindle Direct Publishing (KDP) je izšel sočasno z napravo Kindle, in se je uveljavil kot ena najbolj prepoznavnih samo-založniških platform za avtorje, ki želijo objaviti svoje knjige v obliki e-knjig.  Avtorji in založniki ga uporabljajo za samostojno objavo svoje knjige neposredno v Kindle in Kindle Apps po celem svetu. V odprtem beta testiranju leta 2007, je bila platforma promovirana uveljavljenim avtorjev po e-pošti \cite{44} in z oglasi na Amazon.com.
+
+Avtorji lahko naložijo dokumente v različnih formatih za dostavo preko Whisperneta in lahko zaračunavajo med 0,99 \$ in 200,00 \$ na prenos. \cite{44} Ti dokumenti so lahko napisani v 34 jezikih. \cite{45} Za objavo in delo na KDP je najprej potrebno ustvariti Amazon račun.
+
+\subsection{Naložitev datoteke}
+Po prijavi v svoj Amazon računa lahko naložite svojo knjigo v številnih različnih formatih. 
+\begin{itemize}
+	\item Word (DOC ali DOCX)
+	\item HTML (ZIP, HTM, ali HTML)
+	\item MOBI (MOBI)
+	\item ePub (EPUB)
+	\item Obogateno besedilo(RTF)
+	\item Navadno besedilo (TXT)
+	\item Adobe PDF(PDF)
+\end{itemize}
+KDP naredi pretvorbo formatov na spletu zato je najbolje, da se naloži datoteko knjige v HTML ali MOBI formatu. Uporaba drugih datotečnih formatov se bo odražalo v različni stopnji točnosti in postavitvi v končni (naloženi) datoteki.
+
+Kot pri mnogih digitalno založniških platformah, je skupaj s procesom nalaganja potrebno imeti tudi vse informacije, ki so potrebne za objavo knjige. KDP pregledna plošča omogoča, da se posodobi / naloži novo verzijo in spremeni druge podrobnosti objave kot so opis knjige, avtorja, ime založnika in naslovnica.
+
+\subsection{ISBN in birokracija}
+Objavljanje na Amazon KDP ne zahteva od avtorja, da imajo ISBN. Amazon dodeli edinstveno številko vsaki objavljeni knjigi znan kot ASIN. Lahko se uporabi avtorjev lasten ISBN, vendar KDP ne dobavlja ISBN in ni njen pooblaščen trgovec. Čeprav objava poteka prek KDP, je še vedno potrebno registrirati podrobnosti objave in podatke o avtorskih pravicah z ustreznimi organi v lastni državi. KDP je platforma za samo-založništvo in distribucijo, njen lastnik Amazon je v osnovi spletni trgovec; še vedno ostajate avtor-založnik in ste odgovorni za vso potrebne pravno in registrsko birokracijo.
+
+\subsection{Licenčnine in cenovne možnosti}
+Ko je e-knjiga naložena na KDP, se pojavi na pregledni plošči. Pod možnostjo pravice in cena se določi ali se prodaja  knjiga v posameznih ozemljih ali po svetu. Izbrati se da med 35\% in 70\% stopnjo licenčnine. Stroški dostave prenosa veljajo za stopnjo 70\%, in so odvisni od velikosti datoteke, vsako ozemlje ne izpolnjuje pogojev za višjo stopnjo licenčnine. Da izpolnjuje pogoje za 70\% stopnjo licenčnine, mora biti cena e-knjige med 2,99 \$ in 9,99 \$, cena pa mora biti vsaj 20 odstotkov pod ceno fizičnega izvoda knjige. Licenčnine in cenovne možnosti se da spremeniti v kasnejši fazi. 
+
+\subsection{Poročila, plačila in davčni odtegljaj}
+KDP zagotavljajo mesečna poročila o prodaji e-knjig, vključno z obdobji promocij. Vsa poročila so na voljo za ogled na spletu iz avtorjeve pregledne plošče in so razdeljene po ozemljih. Glavno poročilo plačila vključuje plačilne zneske, davčni odtegljaj, način plačila in druge podatke, ki se jih da filtrirati po prodajnem obdobju, trgu, in statusu plačila preko spustnih menijev v opciji poročila na pregledni plošči. Poročila plačil se lahko prenesejo v Excel formatu. Denar za prodaje kateregakoli meseca izplača Amazon približno 60 dni kasneje.
+
+Amazon KDP zahteva od vseh avtorjev založnikov, da predložijo veljavno davčno identifikacijsko številko (vključno z neprofitnimi in organizacijami oproščenimi davka) zato, da so v skladu s predpisi davčnega poročanja ZDA. Od založnikov v ZDA Amazon zahteva davčno številko ZDA – znano kot TIN. Tuji založniki morajo zagotoviti TIN, če terjajo dajatve sporazumov, ali če je njihov dohodek dejansko povezano s trgovino ali poslovanjem ZDA. Tuji avtorji založniki ne potrebujejo TIN, vendar morajo zaprositi za EIN (posamezniki/ poslovna entiteta) ali ITIN, v nasprotnem primeru Amazon KDP zadrži odstotek vaših licenčnin. Ko se uredi davčna številko, je še vedno potrebno izpolniti W8-BEN obrazec za Amazon KDP. Amazon je pred kratkim začel racionalizirati proces evidentiranja in registracije čezmorske davčnih podatkov in pošiljanje W8-BEN obrazca, to se zdaj lahko opravi preko spletnega procesa. 
+
+Plačila licenčnin za vsako od ozemelj Kindle Trgovine (tista kjer avtor izbere distribuirati svojo knjigo), so avtomatično in neposredno plačane na avtorjev bančni račun ali poslano v obliki čeka  na vaš naslov, glede na način plačila izbran med prijavo in registracijo kot KDP avtor-založnik. Kot večina digitalno založniških platform, naloži Amazon KDP drugačen prag plačila odvisen od izbrane metode plačila. Amazon KDP ne plačuje avtorjem-založnikom prek PayPal. 
+
+\subsection{KDP Select}
+KDP Select omogoča avtorjem, da se odločijo za 90-dnevno ekskluzivno digitalne distribucijo  v zameno za nekaj bonitet. Te vključujejo, da so avtorjeve e-knjige na voljo v Kindlovi izposojevalni knjižnici (Kindle Owners’ Lending Library), kjer lahko člani Amazon Prime izposojajo svoje knjige brezplačno za neomejen čas. Avtorji zaslužijo licenčnine za vsako izposojeno knjigo. Program ponuja tudi avtorjem izbiro med dvema promocijskima funkcijama: Kindlove odštevalne kupčije (Kindle Countdown Deals) ali brezplačno promocijo knjige. Avtorji so prav tako upravičeni do 70\% licenčnine za prodajo strankam na Japonskem, v Indiji, Braziliji in Mehiki. Slaba stran  vseh teh prednosti je, da morajo avtorji, kot pogoj za vpis v KDP Select, svojo e-knjigo distribuirati ekskluzivno preko Amazona.
+
+\section{Smashwords}
+Smashwords (Smashwords, Inc.), s sedežem v Los Gatos, Kalifornija, je platforma za distribucijo e-knjig za neodvisne avtorje in založnike. Družbo je ustanovil Mark Coker in je uradno začela delovati leta 2008. \cite{46}
+
+Smashwords je samopostrežna založniška storitev. Avtorji in neodvisni založniki naložijo svoje rokopise v obliki Microsoft Word datotek, na storitev Smashwords, ki pretvarja datoteke v različne formate e-knjige za branje na različnih e-bralnikih. Po objavi, so knjige na voljo za prodajo na spletu po ceni, ki jo je določil avtor ali neodvisen založnik. Smashwords ne uporablja DRM.
+
+\subsection{Naložitev knjige in oblikovanje}
+Našo knjigo lahko naložimo na Smashwords v enem od dveh formatov:
+\begin{itemize}
+	\item Microsoft Word
+	\item ePub
+\end{itemize}
+
+Smashwords svetuje avtorjem, da se držijo njihovega strogega vodnika za oblikovanje slogov, preden naložijo svojo knjigo. Po avtomatičnem pregledu naložene knjige sledi še ročni pregled, če knjige niso po navodilih oblikovanja potem ne morejo biti na voljo v Smashwordsovem vrhunskemu katalogu (globalni kanali za distribucije e-knjig).
+
+\subsection{ISBN in avtorske pravice}
+Smashwords ponuja dve ISBN možnosti:
+\begin{enumerate}
+	\item Lahko priložite svojo ISBN številko vaše knjige.
+	\item Lahko pridobite brezplačno ISBN od Smashwords.
+\end{enumerate}
+
+Uporaba Smashwordsove brezplačne ISBN registrira Smashwords kot vašega založnika, vendar je to le na papirju, še vedno ostaja avtor sam svoj založnik in upravlja z vsemi pravicami povezanimi s svojo knjigo.
+
+Avtorji ostajajo lastniki avtorskih pravic. Ko objavite z Smashwords, da avtor Smashwordsu ne-izključno pravico do objave, promocijo in distribucijo vašo knjigo, kot tudi vzorce vaše knjige. Ker je odnos ne-izključen, lahko avtor objavi in distribuirajo tudi preko drugih storitev.
+
+\subsection{Distribucijski kanali}
+Avtorji se lahko odločijo za prodajo knjig samo skozi Smashwordsovo e-knjigarno, ali pa izpolnjujejo vse kriterije preverjanja in imajo njihove knjige vključene v kanale vrhunskega kataloga (Smashwords Premium Catalog). Nekatere od teh kanalov so navedeni spodaj, vendar jih obstaja veliko več, vključno z več knjižničnih kanalov. 
+\begin{itemize}
+	\item Apple iBookstore
+	\item Baker \& Taylor
+	\item Barnes \& Noble
+	\item Diesel e-Book Store
+	\item Kobo
+	\item Sony
+	\item Indigo
+	\item Flipkart
+	\item WH Smith
+\end{itemize}
+
+Avtorji se morajo zavedati, da Smashwords opravlja postopek ročnega preverjanja na vseh knjigah, predloženih za kanale vrhunskega kataloga, tako da izpolnjujejo zahteve za distribucijo e-knjige. To varnostno preverjanje lahko traja od enega do dveh dni.
+
+Lahko traja tudi nekaj tednov da se e-knjige pojavijo na vseh globalnih distribucijskih kanalih. Smashwords se ukvarja s številnimi prodajalci na drobno (prodajalci) in drugimi distribucijskimi kanali, in ni v neposrednem nadzoru kdaj se knjiga pojavi na spletni strani trgovca. Najbolj opazen manjka trgovec iz zgornjega seznama distribucijskih kanalov je, seveda, Amazon in njene številne svetovne spletne strani. Smashwords ima distribucijsko pogodbo z Amazon, in prej SW e-knjige so tam razdeliti, ampak SW zdaj navajajo pomanjkanje "v velikem obsegu" objekta kot razlog večina naslovi niso predložene do prodajalca. Vključitev z Amazon ni nemogoče, ampak kot boste videli iz kosa spodaj od SW pogosta vprašanja, obstajajo posebna merila, ki izpolnjujejo pogoje za ročno nalaganje Amazonu. 
+
+Čeprav ima Smashwords distribucijski sporazum z Amazonom, ga ne vključuje v svoje navadne distribucijske kanale. Za distribucijo preko Amazona je potrebno ugoditi še posebnim kriterijem.
+
+\subsection{Licenčnine, plačila in cenovne možnosti}
+Smashwords zagotavlja avtorjem 85\% čistih prihodkov od  knjig prodanih preko Smashwords e-knjigarne in 60\% kataloške cene (maloprodajne cene) za vse kanale, z izjemo Baker \& Taylor, ki je določena pri 45\% kataloške cene.
+
+Avtorji lahko zastavijo ceno njihovih knjig kot brezplačno ali karkoli nad 0,99 \$. Avtorski honorarji se plačajo vsake tri mesece in se lahko izplačajo prek PayPala ali s papirne čekom. Minimalni znesek potreben, da se denar izplača je 10 \$ za PayPal in 75 \$ za papirne čeke.
+
+\subsection{Davčni status in odtegljaj }
+Večina distributerjev e-knjig in založniških platform, kot so Smashwords, Amazon in CreateSpace zahtevajo davčne podatke, bodisi preden so knjige na voljo prek njihovih njih, ali pa, ko se lahko izvrši prvo plačilo licenčnin. Nekatera podjetja so bolj prilagodljiva kot druga, vendar imajo avtorji izven ZDA zadržan delež prodaje, dokler se ne zagotovi davčna številka ZDA (ITIN ali EIN) in predloži W8-BEN obrazec. 
+
+\section{Gumroad}
+Gumroad je platforma, ki omogoča ustvarjalcem, da prodajajo izdelke neposredno potrošnikom. Oblikovalec Sahil Lavingia je leta 2011 ustanovil podjetje z namenom, da prodajajo tako enostavno, kot družbeno deljenje. \cite{47} Podjetje je prejelo več kot 8 milijonov \$ v financiranju. \cite{48}
+
+Ustvarjalci vseh vrst, kot so avtorji, komedijanti, oblikovalci, filmski ustvarjalci, glasbeniki in razvijalci programske opreme, uporabljajo Gumroad, da prodajajo izdelke neposredno potrošnikom. Večinoma so te izdelki digitalne vsebine, kot so albumi, stripi, e-knjige, filmi, igre, glasba ali vaje. Gumroad je zgrajen kot „vstavi in poženi“ izdelek, ki ponuja obdelavo plačil, gostovanje datotek in dostavo, trženje in komunikacijska orodja. \cite{49} Lavingia je izjavil, da je njegova filozofija za Gumroadom vprašati ustvarjalce, kako preživljajo svoj čas za izdelavo stvari in nato zgraditi funkcije za Gumroad, ki omogočajo te logistične funkcije za njih. \cite{50}
+
+Gumroad model je znan po decentralizirani naravi njegovega trga, s poudarkom forum o odnosu med ustvarjalcem in potrošnikom, namesto odkritja. Prav tako je znan po ob bistveno nižjih provizijah kot druge platforme za trženje (5\% + 0.25 \$). \cite{51}
+
+\subsection{Proces prodaje}
+Avtorji izberejo ali je njihov izdelek, ki ga nameravajo prodati v digitalni ali fizični obliki. Izdelku nato določijo ime in ceno, če je izdelek v digitalni obliki naložijo njegove potrebne datoteke iz svoje računalnika ali pa Dropbox računa. Izdelku lahko na pregledni plošči potem dodajo opis in sliko, nastavijo predogled (filmi in glasba) in spreminjajo cenovne možnosti. Avtorjev izdelek nato dobi svoj poseben spletni naslov, ki kaže na ta izdelek in ponuja možnost nakupa. Avtorji lahko objavijo ta spletni naslov kjer hočejo (socialna omrežja, e-pošta itd.). Ko je izdelek kupljen se ga da prenesti, poslušati/gledati v brskalniku ali pa preko Gumroad mobilne aplikacije.
+
+Gumorad vsebuje tudi analitično orodje, ki prikazuje grafe prodaj vaših izdelkov. Ponuja tudi možnost izvoza e-poštnega seznama vseh vaših kupcev.
+
+
+\subsection{Licenčnine in cenovne možnosti}
+Gumroad pobere ()5\% cene izdelka + 0.25 \$) na transakcijo. Od kupcov sprejemajo vse glavne kreditne kartice (Visa, MasterCard, American Express, Discover, Diners Club in JCB), prav tako sprejemajo plačila tudi preko PayPal. 
+
+Avtor lahko prodaja svoj izdelek v vseh glavnih valutah, tako si lahko poveča dobiček, če je njegovo ciljno občinstvo le v nekem delu sveta. Izdelkom lahko avtorji postavijo fiksno ceno, lahko pa tudi izberejo možnost "plačaj kolikor hočeš". Avtorji imajo tudi na voljo prodajati izdelek v obliki naročnine, ki je lahko mesečna ali letna, prav tako lahko izdelek prodajajo kot prednaročilo. Avtorji lahko ponudijo tudi način sposoje za določene tipe izdelkov, kot so filmi in glasba. Plačilo avtorjem so lahko nakazana direktno na njihov račun ali pa na PayPal račun. 
+
+ 
+
+
+\section{Primerjava platform}
+Na spletu obstajajo platforme za trženje praktično kateregakoli digitalnega in pa tudi fizičnega izdelka. V sklopu te diplomske naloge smo se bolj osredotočili na platforme za trženje e-knjig, vendar smo tudi raziskali platforme, ki so namenjene tudi drugačnim izdelkom.
+
+Amazon KDP in Smashwords sta zelo podobni platformi za distribucijo e-knjig. Razlikujeta se v trgu, ki ga ponujata. Smashwords distribuira preko večine trgovcev e-knjig z izjemo Amazona (lahko tudi preko Amazona vendar zelo redko), Amazon KDP pa distribuira znotraj Amazonovih distribucijskih kanalov. Licenčnine pri Smashwordsu so bolj ugodne, kot tiste pri Amazon KDP, vendar Smashwords potrebuje dalj časa za izplačilo, in ima tudi omejitve za najmanjši možni znesek izplačila. Amazon KDP je lažji za uporabo medtem, ko ima Smashwords zelo stroge omejitve pri oblikovanju. V osnovi ponuja Smashwords večje tržišče, saj je z upoštevanjem vseh kriterijev možno distribuirati tudi preko Amazona. 
+
+Gumorad se zelo razlikuje od Amazon KDP in Smashwords. Preko Gumroada je možna prodaja kateregakoli izdelka (knjige, glasba, filmi, programska oprema itd.), vendar je potrebno svoj izdelek tržiti sam medtem, ko ga Amazon KDP in Smaswhords tržijo za vas. Gumoroad je platforma, ki vam naredi domačo stran vašega izdelka in obdeluje plačila. 
+
+Za prodajo e-knjig so namenske platforme, kot sta Amazon KDP in Smashwords veliko bolj uspešne kot ne-specializirane platforme za trženje, kot je Gumroad. Gumroad je pa zelo uspešen, če že imamo občinstvo, ki je zainteresirano za naš izdelek.
+
+\chapter{Orodja za digitalno samozaložništvo}
+\label{orodja}
+
+
+\section{Google Dokumenti, Preglednice in Diapozitivi}
+\label{googleDocs}
+
+Google Dokumenti, Google Preglednice in Google Diapozitivi so urejevalnik besedil, preglednic in predstavitev. Vse to je del zastonjske spletne programske opreme pisarniškega paketa, ki ga ponuja Google v okviru svojih storitev Google Pogon. Paket omogoča uporabnikom ustvarjanje in urejanje dokumentov na spletu, medtem ko sodeluje z drugimi uporabniki v realnem času.
+
+Vsi trije programi so na voljo kot spletne aplikacije, kot Chrome aplikacije, ki delujejo brez povezave in kot mobilne aplikacije za Android in iOS. Aplikacije so kompatibilne z datotekami Microsoft Office. Paket vključuje tudi Google Obrazci (programska oprema za anketiranje), Google Risbe (programska oprema za diagrame) in Google Fuzijske Tabele (upravljalnik baz podatkov; eksperimentalen). Medtem ko sta Google Obrazci in Tabele na voljo samo kot spletne aplikacije, so Google Risbe na voljo tudi kot aplikacija za Chrome.
+
+Paket je tesno povezan s storitvijo Google Pogon. \cite{52} Vse datoteke, ustvarjene z aplikacijami, so privzeto shranjene v Google Pogon. 
+
+\subsection{Funkcionalnosti}
+
+Google Dokumenti je Googlov "programska oprema kot storitev" pisarniški paket. Dokumente, preglednice, predstavitve je mogoče ustvariti z Google Dokumenti, uvožene preko spletnega vmesnika ali poslana po elektronski pošti. Dokumenti se samodejno shranijo v Googlovih strežnikih. Zgodovina revizij se samodejno hrani, tako je mogoče gledati tudi pretekla urejanja (čeprav to deluje samo za sosednje revizije). V brskalniku Google Chrome, se vsebina uporabnikovega Google Pogona prenese na računalnik, tako da se dokumente lahko ureja brez povezave. \cite{53} Dokumente se lahko izvozi na uporabnikovem lokalnem računalniku v različnih formatih (ODF, HTML, PDF , RTF, Text, Office Open XML). Dokumente se lahko označi in arhivira za organizacijske namene. Storitev je uradno podprta na najnovejših različicah brskalnikov Firefox, Internet Explorer, Safari in Chrome, ki tečejo na operacijskih sistemih Microsoft Windows, Apple OS X in Linux. \cite{54} 
+
+Google Dokumenti služijo kot sodelovalno orodje za urejanje dokumentov v realnem času. Dokumenti je mogoče deliti, odprti in urediti  hkrati s strani več uporabnikov, ti uporabniki lahko vidijo spremembe za vsak znak, ki jih z urejanjem naredijo drugi sodelavci. Uporabnikov se ne more obvestiti o spremembah, lahko pa aplikacija obvestit uporabnike, ko se ustvari ali pa odgovori na komentar ali razpravo in tako lajša sodelovanje. Ne da se označiti ali skočiti na spremembe, ki jih naredil posamezni urednik v realnem času pisanja,. Vendar pa je trenutni položaj urednika zastopan z njegovo specifično barvo / kazalcem, tako vidijo spremembe, ko se zgodijo če še drugi uredniki gledajo tisti del dokumenta. V stranski vrstici se nahaja klepetalnica, ki omogoča urednikom razpravljali urejanja. Tudi zgodovina revizij omogoča uporabnikom, da si ogledajo dopolnitve k dokumentom, kjer se vsak avtorja razlikuje po barvi, vendar je treba celoten dokument preiskati ročno, da se najdejo te spremembe. Funkcija zgodovine revizij prikaže le eno spremembo naenkrat, primerjajo se le sosednje revizije in uporabniki ne morejo nadzorovati, kako pogosto se le te shranijo. Novo funkcija za sodelovanje, uvedena junija 2014 omogoča vsakemu uporabniku z dostopom za komentiranje, da naredi predloge za urejanje. Ta funkcija je trenutno na voljo samo za dokumente. \cite{55} \cite{56} 
+
+Aplikacija podpira odpiranje in izvoz dveh standardnih ISO formatov dokumenta: OpenDocument in Office Open XML. To vključuje tudi podporo za gledanje lastniških formatov, kot so .doc in .xls. \cite{57} 
+
+Google Dokumenti je eden od mnogih storitev za izmenjavo dokumentov oblačnega računalništva. \cite{58} Večina storitev za izmenjavo dokumentov zahtevajo pristojbine. (Google Dokumenti so brezplačni za posameznike, ima pa pristojbine za podjetja, ki se začnejo na \$ 5 / mesec). \cite{59} Njegova priljubljenost med podjetji narašča zaradi izboljšanih funkcij za izmenjavo in dostopnost. Poleg tega priljubljenost Google Dokumentov  hitro raste  med študenti in izobraževalnimi ustanovami. \cite{60}
+
+V septembru 2009 je bil dodan urejevalnik enačb, ki podpira format LaTeX; vendar pa Google Dokumentom manjka funkcija za številjenja enačb. \cite{61} \cite{62}
+
+Na voljo je preprosto orodje za najdbo in zamenjavo; v prvotni različici ni bila možno iskati v obratni smeri, novejše različice pa dovoljujejo povratno iskanje in zamenjavo.
+
+Google Dokumenti vključujejo spletno odložišče, ki omogoča uporabnikom kopiranje in lepljenje  med Googlovimi dokumenti, preglednicami, predstavitvami in risbami. Spletni odložišče se lahko uporablja tudi za kopiranje in lepljenje vsebin med različnimi računalniki. Kopirani predmeti so shranjeni na Googlovih strežnikih za največ 30 dni. Google Dokumenti podpira tudi bližnjice na tipkovnici za večino kopiranja in lepljenja. \cite{63}
+
+Google ponuja Office razširitev za Google Chrome, ki omogoča uporabnikom, da si ogledajo in urejajo Microsoft Office dokumente na Google Chrome, preko aplikacij za Google Dokumente, Preglednice in Diapozitive. Razširitev se lahko uporabi za odpiranje zbirke Office datotek s pomočjo Chrome, ki so shranjene na računalniku  ali pa na spletu (v obliki priponke, rezultatov spletnega iskanja, itd), brez potrebe po prenosu. Ta razširitev je že privzeto nameščena na sistemu Chrome OS. \cite{64}
+
+Google Cloud Connect je bil vtičnik za Windows Microsoft Office 2003, 2007 in 2010, ki je lahko samodejno shranjeval in sinhroniziral katerikoli Microsoft Word dokument, PowerPoint predstavitev, Excel preglednice ali pa Google Dokumente v format Google Dokumentov ali Microsoft Office. Spletna kopija se samodejno posodobi vsakič, ko je shranjen dokument Microsoft Office. Microsoft Office dokumente se lahko ureja brez povezave  in sinhronizira kasneje na spletu. Google Cloud Sync ohranja prejšnje različice dokumentov Microsoft Office in omogoča več uporabnikom, da sodelujejo z delom na istem dokumentu hkrati. \cite{65} \cite{66} Vendar pa je bil Google Cloud Connect prekinjen 30. aprila 2013, ko je Google Pogon dosegal vse zgoraj navedene naloge, z boljšimi rezultati. \cite{67}
+
+Google Preglednice in Google Strani vključujejo tudi Google Apps Script za pisanje kode v dokumente, na podoben način kot Visual Basic za Aplikacije v Microsoft Office. Skripte se lahko aktivira bodisi z delovanjem uporabnika ali s sprožilcem v odgovor na dogodek. \cite{68} \cite{69}
+
+Google Obrazci in Google Risbe so bile dodane v paket Google Dokumentov. Google Obrazci je orodje, ki omogoča zbiranje informacij od uporabnikov prek osebnih anket ali kvizov. Informacije se nato zberejo in avtomatično povežejo s preglednico. Preglednice je poseljena z odgovori na anketi in kvizu. \cite{70} \cite{71}
+Google Risbe omogočajo uporabnikom, da sodelujejo pri ustvarjanju, izmenjavi in urejanju slik ali risb. Google Risbe se lahko uporablja za ustvarjanje preglednic, diagramov, modelov, prikaza poteka itd. Vsebuje podmnožico funkcij v Google Diapozitivih, vendar z različnimi predlogami. Njene funkcije vključujejo natančno razporeditev risb s poravnave vodnikov, poravnave na mrežo, avtomatične distribucije in vstavljanje risbe v druge Googlove dokumente, preglednice in predstavitve. \cite{72} \cite{73}
+
+Dne 15. maja 2012, je bilo v Google Dokumente uvedeno raziskovalno orodje. \cite{74} To omogoča uporabnikom, da enostavno dostopajo do Google Iskanja prek stranske vrstice med urejanjem dokumenta. \cite{75}
+
+Dne 11. marca 2014 je Google predstavil dodatke za Google Dokumente in Preglednice, ki omogočajo uporabnikom, da uporabljajo aplikacije tretjih oseb nameščene iz trgovine z dodatki, da bi dobili dodatne funkcije v glavnih storitev. \cite{76} Trgovina z dodatki je oktobra 2014 postala na voljo tudi za Google Obrazce. \cite{77} 
+
+\subsection{Datotečne meje}
+
+Posamezni dokumenti ne smejo presegati velikosti 1 GB, vsaka vgrajena slika pa ne sme presegati 2 MB. \cite{78} Naložene datoteke, ki niso pretvorjene v format Google Dokumentov so lahko velike do 5 TB.\cite{78}
+
+Obstajajo tudi posebne omejitve, značilne za tipe datoteke, ki so navedene spodaj: \cite{78}
+\begin{itemize}
+	\item \textbf{Dokumenti:}
+	1,024,000 znakov, ne glede na število strani ali velikost pisave. Naložene datoteke dokumentov, ki so pretvorjene v format Google Dokumentov ne sme biti večja od 50 MB.
+	\item \textbf{Preglednice:}
+	V Google Preglednicah, imajo lahko preglednic največ 2 milijona celic, za formule veljajo še dodatne omejitve kompleksnosti. Naložene datoteke preglednic, ki se pretvorijo v Google Preglednice so omejene na največ 20 MB.
+	\item \textbf{Diapozitivi:}
+	Predstavitve, ustvarjene v Google Diapozitivih so lahko velike do 100 MB - kar je okoli 400 diapozitivov. Naložene datoteke predstavitev, ki se pretvorijo v format Google Diapozitivov so tudi lahko velike do 100 MB. 
+\end{itemize}
+
+
+\subsection{Podprti datotečni formati}
+
+Datoteke v naslednjih formatih se lahko ogleda in pretvori v format Dokumentov, Preglednic ali Diapozitivov: \cite{79}
+\begin{itemize}
+	\item Za dokumente: .doc (če je novejši kot Microsoft Office 95), .docx, .docm .dot, .dotx, .dotm, .html, golo besedilo (.txt), .rtf, .odt
+	\item Za preglednice: .xls (če je novejši kot Microsoft Office 95), .xlsx, .xlsm, .xlt, .xltx, .xltm .ods, .csv, .tsv, .txt, .tab
+	\item Za predstavitve: .ppt (če je novejši kot Microsoft Office 95), pptx, .pptm, .pps, .ppsx, .ppsm, .pot, .potx, .potm
+	\item Za risbe: .wmf
+	\item Za OCR: .jpg, .gif, .png, .pdf 
+\end{itemize}
+
+
+
+
+
+
+Gledanje / pretvorba ni vedno popolna ali točna (netočnosti so v glavnem formatiranje in so vidne). Pretvarjanje dokumenta iz formatov Microsoft, OpenOffice ali formata ODF v Googlov zapis in nazaj bo odstranilo nekaj informacij, funkcij in spremenilo postavitev. Še posebej, Google ne podpira datotek / lastnosti dokumenta (metapodatki), ki bi bili vidni z Windows Explorerjem in v ustreznih Microsoftovih aplikacijah; Pri pretvorbi dokumenta iz Googlovega zapisane bo nastavljena datoteka/lastnosti dokumenta.
+
+\subsection{Mobilna dostopnost}
+
+30. aprila 2014 je Google objavil samostojne mobilne aplikacije za Google Dokumente in Google Preglednice za Android in iOS. Podobna aplikacija za Google Diapozitive je izjavil naj bi prišla "kmalu". Google Diapozitivi za Android so izšli 25. junija 2014 na Googlovi I/O konferenci, medtem ko je različica za iOS izšla 25. avgusta 2014. Google Dokumenti, Preglednice in Diapozitivi omogočajo uporabnikom, da ustvarijo, gledajo in urejajo dokumente, preglednice in predstavitve. Te aplikacije delujejo tudi brez povezave in so kompatibilna z datotečnimi formati Microsoft Office. \cite{80}
+
+Brskalnik Safari na iOS tako omogoča uporabnikom, da si ogledajo, uredijo in ustvarijo Google dokumente, preglednice in predstavitve. \cite{81} Poleg tega Google Aplikacija za iPhone in iPad  omogoča uporabnikom ogled in urejanje datoteke Google Dokumentov. Večina drugih mobilnih naprave lahko tudi ogleda in ureja dokumente in preglednice Google Dokumentov  z uporabo mobilnega brskalnika. \cite{82} PDF datoteke, si je možno ogledati, vendar se jih ne da urejati. 
+
+\section{Overleaf}
+\label{overleaf}
+
+Overleaf je sistem za sodelovalno pisanje in objavljanje, namenjen izdelavi akademskih člankov za avtorje in založnike. Ta storitev mogoča ustvarjanje, urejanje in deljenje znanstvenih idej na spletu z uporabo LaTex, ki je močno orodje za znanstveno pisanje. Overleaf uporablja t. i. „freemium“ poslovni model, kar pomeni, da je večina funkcij na voljo brezplačno, za dodatne zmogljivosti (kot so večji prostor za shranjevanje, večja omejitev datotek na projekt), pa je potrebno plačati. Od svoje ustanovitve leta 2011 je hitro rasla, danes imajo 250.00 uporabnikov iz več kot 180 celega sveta, ki so z uporabo te storitve ustvarili več kot 3 milijone projektov.
+
+\subsection{Funkcionalnosti}
+Overleaf ne potrebuje namestitve nobene programska oprema, delo poteka prek brskalnika, projekti pa se prevajajo sproti tako, da se lahko pisanje in kolaboracija takoj prične. Ponujene so tudi vaje in pomoč za pisanje v sistemu Overleaf in za spoznanje z LaTeXom.
+
+\paragraph{Urejevalnik besedila}
+V Overleaf urejevalniku besedila lahko preklapjamo med 2 načinoma:
+\begin{itemize}
+	\item Obogateno Besedilo
+	\item LaTeX
+\end{itemize}
+V načinu Obogatenega Besedila, lahko dosežemo večino funkcionalnosti LaTeXa (kot so, vstavljanje enačb, slik, oblikovanje) brez znanja LaTeX sintakse, lahko pa celotno besedilo napišemo kar v LaTeX načinu. Projekt se prevaja v ozadju med pisanjem, rezultati sprememb so takoj vidni in si jih lahko ogledamo na desni strani urejevalnika, kjer je okence, ki kaže predogled besedila. Poskrbljeno je tudi za napake, Overleaf nam jih pokaže v vrstici v realnem času brez potrebe gledanja v LaTeXov dnevnik.
+
+\paragraph{Kolaboracija}
+Vsak projekt, ki ga ustvarite ima tudi skrivno povezavo, ki jo lahko pošljete soavtorjem, ki tako dobijo zmožnost pregleda, komentiranja in urejanja vašega projekta. Število soavtorjev ni omejeno. Overleaf pregledno sinhronizira spremembe od vseh avtorjev, tako da ima vsakdo vedno najnovejšo različico projekta.
+
+\paragraph{Integrirano založništvo}
+Avtorji lahko takoj in neposredno objavljajo v izbrani od možnih revij z Overleafovim integriranim sistemom za oddajo vlog. Število založniških partnerjev se veča iz leta v leto.
+
+\paragraph{Mobilnost}
+Overleaf deluje preko brskalnika tudi na tablicah in pametnih telefonih, brez potrebe po uporabi specifične aplikacije.
+
+\paragraph{Druga uporabnost}
+Z uporabo raznih predlog se, da z Overleafom ustvariti tudi predstavitve. Predogled pomaga tudi z ustvarjanjem zapletenih tabel, slik tikz in grafov pgfplot.
+
+\paragraph{Dodatna varnost z OverleafPro}
+Z plačljivo verzijo se lahko ustvari varovane projekte z dodano varnostjo. Ponuja možnost dodajanja in odstranjanje sodelavcov kadarkoli in podeljevanje posebnih pravic dostopa kolaborantom.
+
+
+\section{Wordpress}
+\label{wordpress}
+
+WordPress je brezplačen in odprto-kodni sistem za upravljanje vsebin (CMS), ki temelji na PHP in MySQL. \cite{83} Funkcije vključujejo vtičniško arhitekturo in sistem predlog. WordPress je januarja 2015 uporabljalo več kot 23,3\% od top 10 milijonov spletnih strani. \cite{84} WordPress je najbolj priljubljen sistem blogiranja uporabljen na spletu \cite{85}, na več kot 60 milijonov spletnih strani. \cite{86}
+
+Izšel je 27. maja 2003, z njenimi ustanovitelji, Matt Mullenwega \cite{87} in Mike Littla, \cite{88} kot razcep b2/cafelog. Dovoljenje, pod katerim se sprosti programska oprema WordPress je GPLv2 (ali novejša) iz Free Software Foundation. \cite{89} 
+
+\subsection{Funkcionalnosti}
+WordPress uporablja sistem spletnih predlog s pomočjo procesorja predlog.
+
+\paragraph{Teme}
+WordPress uporabniki lahko namestijo in preklapljajo med temami. Teme uporabnikom omogočajo, da spremenijo videz in funkcionalnost spletne strani WordPress in jih je mogoče namestiti brez spreminjanja vsebine ali zdravja strani. Vsaka WordPress spletna stran zahteva, da je prisotna najmanj ena tema in vsako je treba oblikovati z uporabo WordPress standardov s strukturiranim PHP, veljavnim HTML in prekrivnimi slogi (CSS). Teme so lahko nameščene neposredne s pomočjo WordPress  skrbniškega orodja "Videz" v pregledni plošči, lahko pa so tematske mape nameščene preko FTP. \cite{90} PHP, HTML in CSS kodo najdenih v temah se lahko doda ali uredi za zagotavljanje naprednih funkcij. WordPress teme so na splošno razdeljeni v dve kategoriji, zastonjske in plačljive teme. Vse zastonjske teme so navedene v WordPressovem imeniku tem, plačljive teme pa je treba kupiti od tržnic in posameznih razvijalcev WordPress. Uporabniki WordPress lahko prav tako ustvarjajo in razvijajo svoje lastne teme po meri, če imajo znanje in spretnost, da to storijo. Če uporabniki WordPress nimajo razvojnega znanja o temah, potem lahko prenesejo in uporabijo brezplačno WordPress teme iz wordpress.org. 
+
+\paragraph{Vtičniki}
+Wordpress arhitektura vtičnikov omogoča uporabnikom razširitev funkcij spletne strani ali bloga. WordPress ima na voljo več kot 40.501  vtičnikov, \cite{91}, od katerih vsak ponuja funkcije po meri in funkcije, ki omogočajo uporabnikom, da prilagodijo svoje strani po njihovih osebnih potrebah. Te prilagoditve so zajemajo vse od optimizacij iskalnikov, odjemalniških portalov, ki se uporabljajo za prikaz zasebnih informacij prijavljenim uporabnikom, do prikazovalnih funkcij vsebine, kot so dodajanje gradnikov in krmarjenje. Vendar niso vedno vsi razpoložljivi vtičniki  na tekočem z nadgradnjami in kot rezultat morda ne delujejo pravilno ali pa sploh ne delujejo. \cite{92} WordPress spodbuja razvijalce, da predložijo vtičniki, bodisi brezplačno ali plačljiv v depo, kjer bodo ročno pregledani. \cite{93}
+
+\paragraph{Mobilniki}
+Lastne aplikacije obstajajo za WebOS, \cite{94} Android, \cite{95} iOS (iPhone, iPod Touch, iPad), \cite{96} \cite{97} Windows Phone in BlackBerry. \cite{98} Te aplikacije, ki jih je zasnoval Automattic, omogoči omejen niz možnosti, ki poleg sposobnosti za ogled statistike, vključuje dodajanje novih objav in strani bloga, komentiranje, moderiranje komentarjev, odgovarjanje na komentarje. \cite{96} \cite{97} 
+
+\paragraph{Večuporabništvo in večblogovje}
+Pred različico 3, je WordPress podpiral le en blog na namestitev, čeprav se lahko zažene več sočasnih  kopij iz različnih imenikov, če so nastavljene, da uporabijo ločene tabele zbirke podatkov. WordPress Multisites (prej imenovan večuporabniški WordPress WordPress MU, ali WPMU) je  razcep WordPressa ustvarjen, da omogoča več blogom obstajati v eni namestitvi in se ga lahko administrira s centraliziranim vzdrževalcem. WordPress MU omogoča gostovanje svoje blogerske skupnosti na svojih spletnih straneh, kot tudi nadzor in moderiranje vseh blogov iz ene pregledne plošče. WordPress MS dodaja osem novih podatkovnih tabel za vsako blog.
+
+Od izida WordPress 3, se je WordPress MU združil z WordPress. \cite{99}
+
+\paragraph{Ostale funkcionalnosti}
+WordPress ima tudi integrirano upravljanje povezav; iskalnikom prijazno čisto strukturo stalnih povezav; sposobnost dodeljevanja člankom več kategorij; in podporo za označevanje objav in člankov. Vključeni so tudi avtomatski filtri, ki zagotavlja standardizirano oblikovanje besedila v člankih (na primer, pretvorbo navadnih narekovajev v pametne narekovaje). WordPress podpira tudi Trackback ter Pingback standarde za prikazovanje povezave do drugih spletnih strani, ki so sami povezani na objavo ali članek. WordPressove blog objave se lahko ureja v HTML z uporabo vizualni urejevalnik, ali z eno od številnih vtičnikov, ki omogočajo različne prilagojene funkcije za urejanje. 
+
+\section{Primerjava orodij}
+\label{orodja_vrednotenje}
+Obstaja veliko spletnih orodij, s katerimi lahko ustvarimo našo digitalno vsebino, kot so članki, knjige, blogi in spletne strani. Orodja se med seboj razlikujejo po svojem namenu, in nekatera so bolj primerna kot druga za določeno nalogo. 
+
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{ | l | c | c |c | c | c | c |}
+			\hline
+			& Urejevalnik besedil & Večavtorstvo & TeX & Blog & Mobilnost & Git  \\ \hline
+			Google Docs & \checkmark & \checkmark & x & x & \checkmark & x  \\
+			Wordpress & x & x & x & \checkmark & \checkmark & x \\
+			Overleaf & \checkmark & \checkmark & \checkmark & x & \checkmark & x \\
+			Papeeria & \checkmark & \checkmark & \checkmark & x & \checkmark & \checkmark \\
+			GitBook & \checkmark & \checkmark & \checkmark & x & \checkmark & \checkmark \\
+			MS Word Online & \checkmark & \checkmark & x & x & \checkmark & x \\	 
+			\hline
+		\end{tabular}
+	\end{center} 
+	\caption{Primerjava funkcionalnosti orodij.}
+	\label{tbl:orodja}
+\end{table}
+
+Orodja lahko v glavnem razdelimo v 3 skupine po njihovih namenih:
+\begin{itemize}
+	\item Navadne vsebine.
+	\item Znanstvene vsebine.
+	\item Spletne vsebine.
+\end{itemize}
+
+\subsection{Navadne vsebine}
+Sem spadata Google Dokumenti, Preglednice in Diapozitivi in pa MS Word Online. Namenjena sta pisanju navadnih besedil, ki ne vključujejo znanstvenih enačb in funkcionalnosti, ki jih najdemo pri urejevalnikih z TeX podporo. Sta tudi zelo lahka za uporabo, ne potrebujemo nič bolj naprednega znanja kot pri delu z kateremkoli drugim navadnih urejevalnikom besedila. Gooogle Dokumenti, Preglednice in Diapoozitivi je bolj fleksibilno orodje in ponuja še dodatne funkcionalnosti, kot so ustvarjanje predstavitev in preglednic. 
+
+\subsection{Znanstvene vsebine}
+Sem spadajo Overleaf, Papeeria in GitBook. Namenjene so pisanju	znanstvenih vsebin, ki vsebujejo veliko formul in enačb. Ta orodja so zahtevnejša za uporabo saj zahtevajo znanje iz TeX in LaTeX. Overleaf in Papeeria oba ponujata celotno podporo LaTeX, medtem ko GitBook vključuje le osnovni TeX za pisanje formul in enačb. Overleaf in GitBook oba tudi ponujata možnost direktne objave znanstvenega članka v svoji skupnosti in v primeru Overleafa tudi v določenih znanstvenih revijah.
+
+\subsection{Spletne vsebine}
+Sem spada Wordpress. Ta orodja omogočajo uporabniku gostovanje in ustvarjanje spletnih strani in raznih blogov. Ustvarjanje lahkih vsebin je lahko (majhni blogi in osnovne spletne strani) in ni potrebno znanje iz HTML/CSS. Če pa hočemo ustvariti profesionalno stran z zapleteno vsebino pa so ta orodja veliko bolj zapletena za uporabo. 
+
+\chapter{Sklepne ugotovitve}
+\label{zakljucek}
+Cilj diplomske naloge je bilo predstaviti digitalno samozaložništvo publiki in morebitnim avtorjem, ter jim olajšati delo pri izbiri raznih platform in orodij, ki se uporabljajo pri procesu digitalnega samozaložništva. 
+
+Predstavili smo kaj digitalno samozaložništvo zajema in njegov proces ter možne oblike v katerih je lahko e-knjiga zapisana. Predstavili smo tudi platforme za trženje našega izdelka in predstavili v katerih primerih se odločimo za uporabo ene namesto druge. Opisali smo različna tudi orodja, ki so primerna za uporabo pri izdelovanju naših digitalnih vsebin, ter razložili za kakšne vsebine so bolj primerna določena orodja.
+
+Cilje diplomske naloge smo opravili in celotno tematiko pokrili na širši način, možnosti nadgradnje bi lahko bila izdelava in objavitev naše diplomske naloge v enemu od teh orodij in platform. 
+
+
+
+\begin{thebibliography}{99}
+\addcontentsline{toc}{chapter}{Literatura}
+\bibitem{1} Pepitone, Julianne. \"Tablet sales may hit \$75 billion by 2015\", CNN Money (CNN). 
+[Online]. Dosegljivo:\\ http://money.cnn.com/2011/04/19/technology/tablet\_forecasts/index.htm.
+[Dostopano 4.1.2016].
+
+\bibitem{2} Rebecca McPheters. "Magazines and Newspapers Need to Build Better Apps". Advertising Age.
+[Online]. Dosegljivo:\\ http://adage.com/article/media/viewpoint-magazines-newspapers\-build-apps/232085.
+[Dostopano 4.1.2016].
+
+\bibitem{3} Dale Maunum Norbert Hildebrand. "The e-Book Reader and Tablet Market Report", Insight Media, October, 2010. As reported by Richard Hart, E-books look to be hit over holiday season, ABC 7 News.
+[Online]. Dosegljivo:\\ https://web.archive.org/web/20130101152545. http://www.insightmedia.info/reports/2010ebr\_details.php.
+[Dostopano 4.1.2016].
+
+\bibitem{4} Yinka Adegoke. "Apple jumps into digital textbooks fray". Yahoo News.
+[Online]. Dosegljivo:\\ https://web.archive.org/web/20120123053645/
+http://news.yahoo.com/apple-rolls-digital-textbook-ibooks-2-154118088.html.
+[Dostopano 4.1.2016].
+ 
+\bibitem{5} Chicago Manual of Style, Chapter 1
+[Online]. Dosegljivo:\\ http://www.chicagomanualofstyle.org/15/appA\_1.html.
+[Dostopano 4.1.2016].
+ 
+\bibitem{6} Chicago Manual of Style, Chapter 9
+[Online]. Dosegljivo:\\ http://www.chicagomanualofstyle.org/15/appA\_1.html.
+[Dostopano 4.1.2016].
+
+\bibitem{7} Gardiner, Eileen, Ronald G. Musto. "The Electronic Book." In Suarez, Michael Felix, H. R. Woudhuysen. "The Oxford Companion to the Book". Oxford: Oxford University Press, 2010, p. 164.
+
+\bibitem{8} Oxford Dictionaries. "e-book".  Oxford University Press. 
+[Online]. Dosegljivo:\\ http://www.oxforddictionaries.com/us/definition/american\_english/e-book.
+[Dostopano 4.1.2016].
+
+\bibitem{9} Pew Research. "E-reading rises as device ownership jumps". 
+[Online]. Dosegljivo:\\ http://www.pewinternet.org/files/old-media//Files/Reports/2014/PIP\_E-reading\_011614.pdf
+[Dostopano 4.1.2016]. 
+
+\bibitem{10} Where do these books come from?
+[Online]. Dosegljivo:\\ https://support.google.com/books/answer/43726?hl=en-IN\&ref\_topic=4359341.
+[Dostopano 4.1.2016].
+
+\bibitem{11} Chimo Soler. "eBooks: la guerra digital global por el dominio del libro"
+[Online]. Dosegljivo:\\ http://www.realinstitutoelcano.org/wps/portal/rielcano/contenido?
+WCM\_GLOBAL\_CONTEXT=/elcano/elcano\_es/zonas\_es/lengua+y
++cultura/ari92-2010.
+[Dostopano 4.1.2016].
+
+\bibitem{12} American Library Association. "Frequently asked questions regarding e-books and U.S. libraries".
+[Online]. Dosegljivo:\\ http://www.ala.org/transforminglibraries/frequently-asked-questions-e-books-us-libraries.
+[Dostopano 4.1.2016].
+
+\bibitem{13} Doris Small. "E-books in libraries: some early experiences and reactions."
+[Online]. Dosegljivo:\\ https://www.highbeam.com/doc/1G1-66217098.html
+[Dostopano 4.1.2016].
+ 
+\bibitem{14} Genco, Barbara. "It's been Geometric! Documenting the Growth and Acceptance of eBooks in America's Urban Public Libraries." 
+[Online]. Dosegljivo:\\ http://www.slideshare.net/bgenco/its-been-geometric-genco-ppt-for-ifla-session212-final.
+[Dostopano 4.1.2016].
+
+\bibitem{15} Saylor, Michael (2012). "The Mobile Wave: How Mobile Intelligence Will Change Everything". Vanguard Press. p.124. ISBN1-59315-720-7. 
+
+\bibitem{16} Libraries Connect Communities: Public Library Funding \& Technology Access Study 2009–2010.
+[Online]. Dosegljivo:\\ http://web.archive.org/web/20110116010558/
+http://www.ala.org/ala/research/initiatives/plftas/2009\_2010/index.cfm.
+[Dostopano 4.1.2016].
+
+\bibitem{17}. "66\% of Public Libraries in US offering e-Books". Libraries.wright.edu.
+[Online]. Dosegljivo:\\ http://www.libraries.wright.edu/noshelfrequired/2010/08/18/66-of-public-libraries-in-us-offering-ebooks.
+[Dostopano 4.1.2016].
+
+\bibitem{18} "At the Tipping Point: Four voices probe the top e-book issues for librarians." Library Journal. Avgust 2010.
+
+\bibitem{19} "J.K. Rowling refuses e-books for Potter". USA Today. 2005-06-14. 
+[Online]. Dosegljivo:\\ http://usatoday30.usatoday.com/life/books/news/2005-06-14-rowling-refuses-ebooks\_x.htm.
+
+\bibitem{20} Linda Frederiksen, Joel Cummings, Lara Cummings, Diane Carroll. "Ebooks and Interlibrary Loan".  Journal of Interlibrary Loan, Document Delivery and Electronic Reserves. 21(31), 2011. p. 117-131. 
+
+\bibitem{21}. Becker, B. W. "The e-Book Apocalypse: A Survivor's Guide". Behavioral \& Social Sciences Librarian v. 30 no. 3 (July 2011) p.181–4 
+
+\bibitem{22} "Library Ebook Vendors Assess the Road Ahead". The Digital Shift. 
+http://www.thedigitalshift.com/2014/08/ebooks/big-five-ebooks-now-available-ebook-vendors-assess-road-ahead.
+[Dostopano 4.1.2016].
+
+\bibitem{23} Falcone, John (July 6, 2010). "Kindle vs. Nook vs. iPad: Which e-book reader should you buy?". CNet.
+[Online]. Dosegljivo:\\http://www.cnet.com/news/kindle-vs-nook-vs-ipad-which-e-book-reader-should-you-buy.
+
+\bibitem{24} MobileRead Wiki – Rocket eBook. Wiki.mobileread.com (2011-11-20). 
+[Online]. Dosegljivo:\\ http://wiki.mobileread.com/wiki/Rocket\_eBook.
+[Dostopano 4.1.2016].
+
+\bibitem{25} Take, First (2010-09-11). "Bookeen Cybook OPUS | ZDNet UK". Community.zdnet.co.uk. [Online]. Dosegljivo:\\ http://www.zdnet.com/blog.
+[Dostopano 4.1.2016].
+
+\bibitem{26} "iPad – See the web, email, and photos like never before". Apple. 
+[Online]. Dosegljivo:\\ http://www.apple.com/ipad.
+[Dostopano 4.1.2016].
+
+
+\bibitem{27} "Apple Launches iPad". Apple.com.
+[Online]. Dosegljivo:\\ http://www.apple.com/pr/library/2010/01/27Apple-Launches-iPad.html.
+[Dostopano 4.1.2016].
+
+
+\bibitem{28} "Scarcity of Giller-winning 'Sentimentalists' a boon to eBook sales". Toronto Star.
+[Online]. Dosegljivo:\\ http://www.thestar.com/entertainment/books/2010/11/12/scarcity\_of
+\_gillerwinning\_sentimentalists\_a\_boon\_to\_ebook\_sales.html.
+[Dostopano 4.1.2016].
+
+
+\bibitem{29} Matt Phillips (2009-05-07). "Kindle DX: Must You Turn it Off for Takeoff and Landing?". The Wall Street Journal. 
+[Online]. Dosegljivo:\\ http://blogs.wsj.com/middleseat/2009/05/07/kindle-dx-must-you-turn-it-off-for-takeoff-and-landing.
+[Dostopano 4.1.2016].
+
+
+
+\bibitem{30} "Cleared for take-off: Europe allows use of e-readers on planes from gate to gate". The Independent. 
+[Online]. Dosegljivo:\\ http://www.independent.co.uk/travel/news-and-advice/cleared-for-take-off-europe-allows-use-of-e-readers-on-planes-from-gate-to-gate-8993384.html.
+[Dostopano 4.1.2016].
+
+
+\bibitem{31} "In Europe, Slower Growth for e-Books". New York Times (2014-11-12).
+[Online]. Dosegljivo:\\ http://www.nytimes.com/2014/11/13/arts/international/in-europe-slower-growth-for-e-books.html?\_r=3.
+[Dostopano 4.1.2016].
+
+
+\bibitem{32} McCracken, Jeffrey (2011-03-23). "Barnes \& Noble Said to Be Likely to End Search Without Buyer". Bloomberg.
+[Online]. Dosegljivo:\\ http://www.bloomberg.com/news/articles/2011-03-22/barnes-noble-is-said-to-be-likely-to-end-search-for-buyer-without-a-sale.
+[Dostopano 4.1.2016].
+
+
+\bibitem{33} Suleman, Khidr (September 20, 2010). "Sony Reader Touch and Amazon Kindle 3 go head-to-head". The Inquirer.
+[Online]. Dosegljivo:\\ http://www.theinquirer.net/inquirer/review/1732281/sony-reader-touch-amazon-kindle-head-head.
+[Dostopano 4.1.2016].
+
+
+\bibitem{34} Barnes \& Noble Nook
+[Online]. Dosegljivo:\\ https://en.wikipedia.org/wiki/Barnes\_\%26\_Noble\_Nook
+[Dostopano 4.1.2016].
+
+\bibitem{35} Patel, Nilay (January 27, 2010). "The Apple iPad: starting at \$499". Engadget.
+[Online]. Dosegljivo:\\ http://www.engadget.com/2010/01/27/the-apple-ipad.
+[Dostopano 4.1.2016].
+
+\bibitem{36} Covert, Adrian. "Kobo Touch E-Reader: You'll Want to Love It, But...". Gizmodo.com. 
+[Online]. Dosegljivo:\\ http://gizmodo.com/5812387/kobo-touch-e-reader-youll-want-to-love-it-but.
+[Dostopano 4.1.2016].
+
+\bibitem{37} "Kobo eReader Touch Specs".
+[Online]. Dosegljivo:\\ https://www.kobo.com/kobotouch/
+[Dostopano 4.1.2016].
+
+\bibitem{38} Kozlowski, Michael. "Hands on review of the Pocketbook PRO 902 9.7 inch e-Reader". goodereader.com. 
+[Online]. Dosegljivo:\\ http://goodereader.com/blog/electronic-readers/hands-on-review-of-the-pocketbook-pro-902-9-7-inch-e-reader.
+[Dostopano 4.1.2016].
+
+\bibitem{39}. "PocketBook Touch Specs". 
+[Online]. Dosegljivo:\\ http://www.pocketbook-int.com/us/products/pocketbook-touch.
+[Dostopano 4.1.2016].
+
+
+\bibitem{40} G. Ellison (2002). "The Slowdown of the Economics Publishing Process". Journal of Political Economy 110 (5): 947-993
+
+\bibitem{41} Steve Lawrence. "Online Or Invisible?". 
+[Online]. Dosegljivo:\\ http://www.idemployee.id.tue.nl/g.w.m.rauterberg/publications/
+CITESEER2001online-nature.pdf
+[Dostopano 4.1.2016].
+
+\bibitem{42} Chennupati K. Ramaiah, Schubert Foo, Heng Poh Choo. "eLearning and Digital Publishing."
+[Online]. Dosegljivo:\\ http://www.springer.com/la/book/9781402036408.
+[Dostopano 4.1.2016].
+
+\bibitem{43} Randall Stross. "Publishers vs. Libraries: An E-Book Tug of War".
+[Online]. Dosegljivo:\\ http://www.nytimes.com/2011/12/25/business/for-libraries-and-publishers-an-e-book-tug-of-war.html.
+[Dostopano 4.1.2016].
+
+\bibitem{44} Munarriz, Rick Aristotle (November 27, 2007). "Why Kindle Will Change the World". Motley Fool.
+[Online]. Dosegljivo:\\ http://www.fool.com/investing/general/2007/11/27/why-kindle-will-change-the-world.aspx.
+[Dostopano 4.1.2016].
+
+\bibitem{45} "Amazon Kindle Direct Publishing: Get help with self-publishing your book to Amazon's Kindle Store". Kdp.amazon.com.
+[Online]. Dosegljivo:\\ https://kdp.amazon.com/help?topicId=A9FDO0A3V0119.
+[Dostopano 4.1.2016].
+
+\bibitem{46} DeBare, Ilana (2011-05-12), "Smashwords gets e-books to market", The San Francisco Chronicle.
+[Online]. Dosegljivo:\\ http://www.sfgate.com/business/article/Smashwords-gets-self-published-e-books-to-market-2372063.php.
+[Dostopano 4.1.2016].
+
+\bibitem{47}. Shontell, Alyson. "The Most Interesting Teenager in Sillicon Valley", Business Insider, 2 April 2012. 
+[Online]. Dosegljivo:\\ http://www.businessinsider.com/the-most-interesting-teenager-in-silicon-valley-2012-4.
+[Dostopano 4.1.2016].
+
+\bibitem{48} "Gumroad’s Crunchbase". Crunchbase.
+[Online]. Dosegljivo:\\ https://www.crunchbase.com/organization/gumroad\#/entity.
+[Dostopano 4.1.2016].
+
+\bibitem{49} Gumroad.com 
+[Online]. Dosegljivo:\\ https://gumroad.com.
+[Dostopano 4.1.2016].
+
+
+\bibitem{50} "Gumroad Library for iPhone". Gumroad Blog.
+[Online]. Dosegljivo:\\ http://blog.gumroad.com/post/98809688483/gumroad-library-for-iphone.
+[Dostopano 4.1.2016].
+
+\bibitem{51} Flaherty, Joseph. "Sell to Your Friends: New Startup Gumroad Makes It Easy", Wired, 7 June 2012. 
+[Online]. Dosegljivo:\\ http://www.wired.com/2012/06/gumroad-ecommerce.
+[Dostopano 4.1.2016].
+
+\bibitem{52} "Google Drive". Google
+[Online]. Dosegljivo:\\ https://www.google.com/drive/?authuser=0.
+[Dostopano 4.1.2016].
+
+\bibitem{53} "Access your files offline - Google Drive Help". 
+[Online]. Dosegljivo:\\ https://support.google.com/drive/answer/2375012?hl=en.
+[Dostopano 4.1.2016].
+
+\bibitem{54} "Getting to know Google Docs: System requirements". Google.com. 
+[Online]. Dosegljivo:\\ https://support.google.com/docs/answer/2375082?hl=en\&rd=1.
+[Dostopano 4.1.2016].
+
+\bibitem{55} A new Google Docs". Google Docs Blog. 
+[Online]. Dosegljivo:\\ http://googledocs.blogspot.in/2010/04/new-google-docs.html.
+[Dostopano 4.1.2016].
+
+\bibitem{56} "Google Docs Tour". 
+[Online]. Dosegljivo:\\ http://www.google.com/policies.
+[Dostopano 4.1.2016].
+
+\bibitem{57} "List of supported file types". 
+[Online]. Dosegljivo:\\ https://support.google.com/drive/answer/2424368?hl=en\&rd=2.
+[Dostopano 4.1.2016].
+
+\bibitem{58} "Should you move your business to the cloud?". PC world. 
+[Online]. Dosegljivo:\\ http://www.pcworld.com/article/188173/should\_you\_move
+\_your\_business\_to\_the\_cloud.html.
+[Dostopano 4.1.2016].
+
+\bibitem{59} "Google docs Pricing". 
+[Online]. Dosegljivo:\\ https://apps.google.com/pricing.html.
+[Dostopano 4.1.2016].
+
+\bibitem{60} Firth, Mark \& Mesureur, Germain. "Innovative uses for Google Docs in a university language program", The JALT CALL Journal.
+[Online]. Dosegljivo:\\ http://journal.jaltcall.org/articles/6\_1\_Firth.pdf.
+[Dostopano 4.1.2016].
+
+\bibitem{61} "Google Docs Has an Equation Editor". Google Operating System: Unofficial news and tips about Google. 
+[Online]. Dosegljivo:\\ http://googlesystem.blogspot.in/2009/09/google-docs-has-equation-editor.html.
+[Dostopano 4.1.2016].
+
+\bibitem{62} "Writing Equations in Google Docs". The Chronicle of Higher Education.
+[Online]. Dosegljivo:\\ http://chronicle.com/blogs/profhacker/writing-equations-in-google-docs/29563.
+[Dostopano 4.1.2016].
+
+
+\bibitem{63} "Copy and paste". Google Docs Help. Google. 
+[Online]. Dosegljivo:\\ https://support.google.com/docs/answer/161768.
+[Dostopano 4.1.2016].
+
+\bibitem{64} "Office Editing for Docs, Sheets, and Slides". Chrome Web Store. Google.
+[Online]. Dosegljivo:\\ https://chrome.google.com/webstore/detail/office-editing-for-docs-s/gbkeegbaiigmenfmjfclcdgdpimamgkj?hl=en.
+[Dostopano 4.1.2016].
+
+\bibitem{65} Google Cloud Connect for Microsoft Office available to all.
+[Online]. Dosegljivo:\\ http://googledocs.blogspot.si/2011/02/google-cloud-connect-for-microsoft.html.
+[Dostopano 4.1.2016].
+
+\bibitem{66} "Now Anyone Can Sync Google Docs \& Microsoft Office". Mashable.
+[Online]. Dosegljivo:\\ http://mashable.com/2011/02/24/google-cloud-connect-2/\#xmoNDyg9\_SqI.
+[Dostopano 4.1.2016].
+
+\bibitem{67} "Migrate from Google Cloud Connect to Google Drive". Google.
+[Online]. Dosegljivo:\\ https://support.google.com/a/topic/2490075?hl=en\&rd=1.
+[Dostopano 4.1.2016].
+
+\bibitem{68} Meyer, David (August 20, 2009). "Google Apps Script gets green light".
+[Online]. Dosegljivo:\\ http://www.cnet.com/news/google-apps-script-gets-green-light.
+[Dostopano 4.1.2016].
+
+
+\bibitem{69} Finley, Klint (October 22, 2010). "Google Apps Now Offers Business Process Automation on Google Sites with Scripts". ReadWriteWeb.
+[Online]. Dosegljivo:\\ http://readwrite.com/2010/10/22/google-apps-scripts.
+[Dostopano 4.1.2016].
+
+
+\bibitem{70} "Create a survey using Google Forms". Google.com. 
+[Online]. Dosegljivo:\\ https://support.google.com/docs/answer/87809?hl=en.
+[Dostopano 4.1.2016].
+
+\bibitem{71} Wolber, Andy. "Use Google Forms to create a survey". techrepublic.com.
+[Online]. Dosegljivo:\\ http://www.techrepublic.com/blog/google-in-the-enterprise/use-google-forms-to-create-a-survey.
+[Dostopano 4.1.2016].
+
+
+\bibitem{72} "About Google drawings". Google.
+[Online]. Dosegljivo:\\ https://support.google.com/docs/answer/177123?hl=en\&rd=1.
+[Dostopano 4.1.2016].
+ 
+\bibitem{73} Anthony, Sebastion. "Google Docs Drawing tool removes any reason to use MS Paint ever again".
+[Online]. Dosegljivo:\\ https://web.archive.org/web/20141019065935/
+http://downloadsquad.switched.com/2010/08/18/google-docs-drawing-tool-removes-any-reason-to-use-ms-paint.
+[Dostopano 4.1.2016].
+
+\bibitem{74} "Find facts and do research inside Google Documents". 
+[Online]. Dosegljivo:\\ http://googledocs.blogspot.in/2012/05/find-facts-and-do-research-inside.html.
+[Dostopano 4.1.2016].
+
+\bibitem{75} "Research tool". Google.com. 
+[Online]. Dosegljivo:\\ https://support.google.com/docs/answer/2481802?hl=en.
+[Dostopano 4.1.2016].
+
+\bibitem{76} "Add-ons for Docs and Sheets". Google Drive Blog. Google.
+[Online]. Dosegljivo:\\ http://googledrive.blogspot.si/2014/03/add-ons.html.
+[Dostopano 4.1.2016].
+
+\bibitem{77} "Add-ons for Forms". 
+[Online]. Dosegljivo:\\ http://googledrive.blogspot.si/2014/10/formsadd-ons.html.
+[Dostopano 4.1.2016].
+
+\bibitem{78} "Google Docs Help: Size limits". 
+[Online]. Dosegljivo:\\ https://support.google.com/docs/answer/37603?topic=15119.
+[Dostopano 4.1.2016].
+
+\bibitem{79} "Convert a file to Google Docs, Sheets, or Slides". 
+[Online]. Dosegljivo:\\ https://support.google.com/docs/answer/6055139?rd=2.
+[Dostopano 4.1.2016].
+
+\bibitem{80} "New mobile apps for Docs, Sheets and Slides—work offline and on the go". Official Google Blog. Google.
+[Online]. Dosegljivo:\\ https://googleblog.blogspot.in/2014/04/new-mobile-apps-for-docs-sheets-and.html.
+[Dostopano 4.1.2016].
+
+\bibitem{81} "Google Docs (iPhone web app) Now Google Drive iPhone app review - AppSafari". Appsafari.com. 
+[Online]. Dosegljivo:\\ http://www.appsafari.com/utilities/1343/google-docs.
+[Dostopano 4.1.2016].
+
+\bibitem{82} "Google Mobile". Google.com. 
+[Online]. Dosegljivo:\\ http://www.google.com/mobile/drive.
+[Dostopano 4.1.2016].
+
+\bibitem{83} "WordPress Web Hosting". WordPress.
+[Online]. Dosegljivo:\\ https://wordpress.org/hosting.
+[Dostopano 4.1.2016].
+
+\bibitem{84} "How to Install WordPress". Wpbeginner. 
+[Online]. Dosegljivo:\\ http://www.wpbeginner.com/how-to-install-wordpress.
+[Dostopano 4.1.2016].
+
+\bibitem{85} "How to Install WordPress on your Windows Computer Using WAMP". Wpbeginner. 
+[Online]. Dosegljivo:\\ http://www.wpbeginner.com/wp-tutorials/how-to-install-wordpress-on-your-windows-computer-using-wamp.
+[Dostopano 4.1.2016].
+
+\bibitem{86} "Usage Statistics and Market Share of Content Management Systems for Websites". W3Techs.
+[Online]. Dosegljivo:\\ http://w3techs.com/technologies/overview/content\_management/all.
+[Dostopano 4.1.2016].
+
+\bibitem{87} Mullenweg, Matt. "WordPress Now Available". WordPress.
+[Online]. Dosegljivo:\\ https://wordpress.org/news/2003/05/wordpress-now-available.
+[Dostopano 4.1.2016].
+
+\bibitem{88} "CMS Usage Statistics". BuiltWith.
+[Online]. Dosegljivo:\\ http://trends.builtwith.com/cms.
+[Dostopano 4.1.2016].
+
+\bibitem{89} Coalo, J.J (5 September 2012). "With 60 Million Websites, WordPress Rules The Web. So Where's The Money?". Forbes. 
+[Online]. Dosegljivo:\\ http://www.forbes.com/sites/jjcolao/2012/09/05/the-internets-mother-tongue.
+[Dostopano 4.1.2016].
+
+\bibitem{90} "Commit number 8". 
+[Online]. Dosegljivo:\\ https://core.trac.wordpress.org/changeset/8.
+[Dostopano 4.1.2016].
+
+\bibitem{91} "WordPress › About» License". Wordpress.org.
+[Online]. Dosegljivo:\\ https://wordpress.org/about/license.
+[Dostopano 4.1.2016].
+
+\bibitem{92} "Theme Installation". Codex.wordpress.org. 2013-04-09.
+[Online]. Dosegljivo:\\ https://codex.wordpress.org.
+[Dostopano 4.1.2016].
+
+\bibitem{93} "WordPress > WordPress Plugins". WordPress.org.
+[Online]. Dosegljivo:\\ https://wordpress.org/plugins.
+[Dostopano 4.1.2016].
+
+\bibitem{94} "WordPress custom meta boxes and custom fields plugin". 2014-03-01. 
+[Online]. Dosegljivo:\\ https://metabox.io.
+[Dostopano 4.1.2016].
+
+\bibitem{95}  "Pros and Cons of Wordpress". 
+[Online]. Dosegljivo:\\ http://www.webbuildersguide.com/website-builder-articles/pros-and-cons-of-wordpress.
+[Dostopano 4.1.2016].
+
+\bibitem{96} "WordPress Plugin Repository - A Guide".
+[Online]. Dosegljivo:\\ http://www.smallbusinesswebdesigns.net.au/blog/wordpress-plugin-repository-a-guide-to-the-process-that-awaits-any-developer.
+[Dostopano 4.1.2016].
+
+\bibitem{97} "WordPress for WebOS". WordPress.
+[Online]. Dosegljivo:\\ https://webos.wordpress.org.
+[Dostopano 4.1.2016].
+
+\bibitem{98} "WordPress publishes native Android application". Android and Me.
+[Online]. Dosegljivo:\\ http://androidandme.com/2010/02/news/wordpress-publishes-native-android-application.
+[Dostopano 4.1.2016].
+ 
+\bibitem{99} "Idea: WordPress App For iPhone and iPod Touch".
+[Online]. Dosegljivo:\\ http://www.altafsayani.com/2008/07/12/wordpress-app-for-iphone-and-ipod-touch.
+[Dostopano 4.1.2016].
+
+
+
+
+
+
+\end{thebibliography}
+\end{document}
+

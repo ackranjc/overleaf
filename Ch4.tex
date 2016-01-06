@@ -1,0 +1,43 @@
+% Ch4.tex
+
+\chapter[Demonstration of Tables]{Demonstration of Tables}
+\label{cha:cha4}
+
+This is Chapter \ref{cha:cha4}. We will demonstrate how to present results in tables. It is not difficult but need to practice. 
+
+The materials shown below is taken from my own PhD thesis. For simplicity, I do not cite any reference here. 
+
+
+%-------------------------
+\section[Task Decomposition with Fixed Periods]{Task Decomposition with Fixed Control Periods}
+
+To employ the hierarchical feedback scheduling proposed in this work, we first develop a new task model in which each of the original six control tasks is decomposed into two subtasks: data acquisition and QoC evaluation, and control computation and output. Without loss of the generality, the settings of the decomposed tasks and their priorities are shown in Table \ref{tab:taskmodel}. 
+
+\begin{table}[htb!]
+\setlength{\abovecaptionskip}{0.10\baselineskip plus 0.01\baselineskip minus 0.01\baselineskip}
+\begin{center}
+\caption[Task model in the case studies]{Task model in the case studies. Top level scheduler task T$_0$. Sampling and control task set T$_i = T_{i1}\bigcup T_{i2}$, $i = 1, 2, \cdots, 6$. Control periods are the same as those in Table ...(omitted...). Priority levels are valid only for FP scheduling.}
+\label{tab:taskmodel}
+\begin{tabular}{lcccccc}
+\hline
+Settings & {$G_1(s)$} & {$G_2(s)$} & {$G_3(s)$} & {$G_4(s)$} & {$G_5(s)$} & {$G_6(s)$}\\
+ & T$_{11}$, T$_{12}$ & T$_{21}$, T$_{22}$ & T$_{31}$, T$_{32}$ & T$_{41}$, T$_{42}$ & T$_{51}$, T$_{52}$ & T$_{61}$, T$_{62}$\\
+ \hline
+ Priority & 2, 8 & 3, 9 & 4, 10 & 5, 11 & 6, 12 & 7, 13\\
+ Period (ms) & {0.8 - 2.0} & {1.0 - 2.5} & {1.0 - 2.5} & {1.2 - 3.0} & {1.2 - 3.0} & {1.5 - 3.8}\\
+ \hline
+\multicolumn{7}{l}{Top level scheduler task T$_0$ with the highest priority of 1.}\\
+\multicolumn{7}{l}{Execution times c$_{0} = 10\mu$s; c$_{i1} = 50\mu$s and c$_{i2}=250\mu$s, $i = 1, 2, \cdots, 6$.}\\
+\multicolumn{7}{l}{Deadlines $d_{0} = 1$ms; $d_{i1}$ and $d_{i2}$, $i = 1, 2, \cdots, 6$, are calculated using Eqn. (...omitted...).}\\
+\multicolumn{7}{l}{Other Settings: $\Delta_H = 0.05; \Delta_L = 0.01, \epsilon = 0.9, U_{sp} = 0.92, N_{rqsp}=5$.}\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+We have tested the new task model, in which the original six tasks are decomposed into twelve subtasks, under fixed task periods and FP.
+
+%======================
+\section{More Results}
+
+More results are omitted here......

@@ -1,0 +1,139 @@
+% nomenclature
+
+%\newenvironment{nomenc}{\prefacesection{Nomenclature}}{}
+
+%\chapter*{Nomenclature}
+%\addcontentsline{toc}{chapter}{Nomenclature}
+
+%\begin{nomenc}
+{
+\renewcommand{\arraystretch}{1.2} 
+\begin{longtable}{llr}
+\multicolumn{3}{l}{\textbf{Abbreviations}\hspace{0.4\textwidth}~~}\\
+CAN & Controller Area Network\\
+DM & Deadline-Monotonic (Scheduling) \\
+EDF & Earliest-Deadline-First (Scheduling)\\
+FP & Fixed Priority\\
+IAE & Integral of Absolute Error\\
+IP & Internet Protocol\\
+ITAE & Integral of Time Absolute Error\\
+LCT & Least-Compute-Time (Scheduling)\\
+%MTBE & Methyl \textit{tert}-buty ether\\
+QoC & Quality of Control\\
+QoS & Quality of Service\\
+PD & \multicolumn{2}{l}{Proportional plus derivative (Control/Controller)}\\
+PD2 & \multicolumn{2}{l}{Proportional plus up to the Second-Order Derivative (Compensation)}\\
+PD3 & \multicolumn{2}{l}{Proportional plus up to the Third-Order Derivative (Compensation)}\\
+PI &\multicolumn{2}{l}{ Proportional-Integral (Control/Controller)}\\
+PID & \multicolumn{2}{l}{Proportional-Integral-Derivative (Control/Controller)}\\
+RM & Rate-Monotonic (Scheduling)\\
+NCS & Networked Control System/s\\
+SSE & Sum of Square Error\\
+TCP & Transport Control Protocol\\
+WCCD & Worst-Case Communication Delay\\
+\\
+\multicolumn{2}{l}{\textbf{Symbols}} \hspace{0.4\textwidth}~& {\bf Chapter}\\
+A1 $\sim$ Am & Smart actuators & Ch8,9\\
+C1 $\sim$ C5 & Control computers & Ch8,9\\
+{$c$}  & {Worst case computation time} & Ch5,6,7\\
+{$d$}  & Deadline & Ch5,6,7\\
+$e$ & Control error, $e = r - y_d$ & Ch1\\
+$f(\cdot)$ & Function & Ch10\\
+$G$ & Controller or its transfer function & Ch6,7\\
+{$G_c$} & {Controller or its transfer function}& Ch3,4,10\\
+{$G_L$} & {Process transfer function in disturbance path}& Ch3,4\\
+{$G_p$} & {Process transfer function in manipulation path}& Ch3,4,10\\
+$K$ & Gain & Ch6,7\\
+$K_c$ & Controller gain & Ch3,4,10\\
+$K_p$ & Process gain & Ch3,4,10\\
+{$k$} & {Present sampling instant}& Ch3,4\\
+      & Integer & Ch8\\
+      & Integer representing the $k$th control period & Ch10\\
+$lr$ & Loss rate & Ch10\\
+M1 $\sim$ M5 & Management computers & Ch8,9\\
+$m$ & Integer variable, or the number of smart actuators & Ch8,9\\
+$N$ & Number of requests for scaling down periods & Ch6,7\\  
+$n$ & Total number of tasks & Ch5,6,7\\
+    & The number of data, or the number of smart sensors & Ch8,9\\
+    & Integer & Ch10\\
+$p$ & Period & Ch5,6,7\\
+$Q_1$ & Queue to store one control packet & Ch9,10,11\\
+$Q_2$ & First-in-first-out (FIFO) queue of past control packets & Ch9,10\\
+{$R$} & {Set-point}& Ch3,4\\
+$r$ & Set-point of the plant output & Ch1\\
+{$r_1 \sim r_3$} & {Parameters for prediction of the controlled variable}& Ch3,4\\
+S1 $\sim$ Sn & Smart sensors & Ch8,9\\
+$s$ & Laplace transform operator & 6,7,10\\
+{$T  $} & {Process time constant}& Ch3,4\\
+			  & Task & Ch5,6,7\\
+			  & Control period & Ch9,10,11\\
+$T_C$ & Time instant to deal with control packet dropout & Ch9,11\\
+$T_c$ & Control integral time & Ch6,7\\
+$T_D$ & Time instant to dequeue $Q_1$ & Ch9,10,11\\
+$T_E$ & Earliest time instant to receive control packet & Ch9\\
+{$T_i$} & {Controller integral time (min)}& Ch3,4,10\\
+$T_O$ & Time instant at which a control period commences & Ch9\\
+$T_L$ & Latest time instant to accept control packet & Ch9,10\\
+$T_p$ & Time constant for plant & Ch6,7,10\\
+{$T_s$} & {Sampling period (min)}& Ch3,4\\
+$T_t$ & Time series & Ch8\\
+$t$ & Integer, $t=1, 2, \cdots, N$ & Ch8\\
+    & Time variable & Ch10\\
+$t_{ca}$ & Controller-to-actuator delay & Ch9\\
+$t_{ctr}$ & Control computation time & Ch9\\
+$t_j$ & \multicolumn{2}{l}{Sum of sensor-to-controller-to-actuator jitters \hfill Ch9}\\
+$t_{sc}$ & Sensor-to-controller delay & Ch9\\
+$U$ & CPU utilization & Ch5,6,7\\
+$U^I$ & Workload of the subtask $T^I$ & Ch6,7\\
+$U^{II}$ & workload of the subtask $T^{II}$ & Ch6,7\\
+{$u$} & {Manipulated variable }& Ch1,3,4,10\\
+			& Integer & Ch8\\
+$\hat{u}$ & The estimate of the control signal $u$ & Ch10\\		
+$u_d$ & The digitised form of $u$ & Ch1\\
+$wrt$ & Worst response time & Ch5\\
+{$y$} & {Controlled variable (e.g., stage 7 temperature)}& Ch1,3,4,6,7,10\\
+{$\hat{y}$} & {$d$ steps ahead prediction of $y$}& Ch3,4\\
+$\tilde{y}$ & Control error & Ch6,7\\
+$y_m$& Measurement of the plant output $y$ & Ch1\\
+$y_d$ & The digitised form of the measurement $y_m$ & Ch1\\
+$y_r$ & Set-point of the controlled variable $y$ & Ch10\\
+\\
+\multicolumn{2}{l}{\textbf{Greek Letters}} & \\
+%{$\alpha$} & {Design parameter in $S_2$} & Ch3,4\\
+{$\beta_i$} & {Degree of fulfilment for the \textit{i}th rule}& Ch3,4\\
+$\Delta_H$ & QoC upper bound & Ch6,7\\
+$\Delta_L$ & Dead zone around $\delta\tilde{y}$. $\Delta_L < \Delta_H$ & Ch6,7\\
+$\Delta y_j$ & Control error $(= y_r - y_j)$ & Ch10\\
+{$\Delta \hat{y}$} & {$d\/$ steps ahead prediction of the $y\/$ deviation}& Ch3,4\\
+$\delta\tilde{y}$ & One-step difference of $tilde{y}$ & Ch6,7\\
+{$\epsilon$} & {Small and positive threshold in $S_2$}& Ch3,4\\
+					   & Forgetting factor & Ch6,7\\
+					   & Side length of a non-empty box & Ch8\\
+{$\mu$} & {Membership function}& Ch3,4\\
+        & A measure on interval $[0, 1]$ & Ch8\\
+$\tau$ & Time delay & Ch6,7\\
+       & Scaling exponent & Ch8\\
+$\tau_c$ & \multicolumn{2}{l}{Sum of network delay and control computation delay \hfill Ch10}\\
+$\tau_p$ & Process time delay & Ch10\\
+{$\theta$} & {Process time delay (min)}& Ch3,4\\
+\\
+\multicolumn{2}{l}{\textbf{Superscripts}}\\
+(i) & \multicolumn{2}{l}{The first-, second, or third-order derivative ($i=1, 2$, or $3$) \hfill Ch10}\\
+$max$ & Maximum value or upper bound (for $p$, $p_i$ and $N$) & Ch6,7\\
+$min$ & Minimum value or lower bound (for $p$ and $p_i$) & Ch6,7\\
+\\
+\multicolumn{3}{l}{\textbf{Subscripts}}\\
+$c$ & Controller & Ch6,7\\
+$i$ & \multicolumn{2}{l}{The first or sole subscript to some variables ($c$, $d$, $O$, $p$, $T$, $wrt$)}\\
+    & ~~~~~~to indicate  the $i$th task & Ch5,6,7\\
+$j$ & \multicolumn{2}{l}{The second subscript to some variables ($c$, $d$, $O$, $T$, $wrt$)}\\
+    & ~~~~~~to indicate the $j$th subtask decomposed from a task & Ch5,6,7\\ 
+ & Integers representing the $j$th control period & Ch10\\
+$k$  & Integers representing the $k$th control period & Ch10\\
+$p$ & Plant & Ch6,7\\
+$rq$ & Requests (for $N$) & Ch6,7\\
+$sp$ & Set-point for $U$ and $y$ & Ch6,7\\
+\end{longtable}
+}
+
+%\end{nomenc}

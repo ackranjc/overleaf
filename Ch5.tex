@@ -1,0 +1,36 @@
+% Ch5.tex
+
+\chapter[Compensation for Control Packet Dropout]{Compensation for Control Packet Dropout in Networked Control Systems}
+\label{cha:dropout}
+
+
+Like time-varying network induced delay that have been investigated in the last two chapters, data packet dropout is another challenging problem in real-time networked control systems. Applying the real-time queuing protocol that we developed in the last chapter, we are able to limit the sum of the network induced communication delay and the control computation delay to within a control period. This one-period delay is further guaranteed by improved {\bf integrated design of real-time networked control} through embedding packet dropout compensation into the queuing protocol. 
+
+This chapter proposes to compensate for the control packet dropout at the actuator using past control signals. Three model-free strategies for control packet dropout compensation, namely, PD (proportional plus derivative), PD2 (Proportional plus up to the second-order derivative), and PD3 (proportional plus up to the third-order derivative) are developed. They are suitable for a large number of NCS without the need to tune the compensator parameters. The proposed dropout compensation schemes are demonstrated through numerical examples.  
+
+The core content of this work has been published in two papers \cite{TianINS07,TianIJCM07}.
+
+
+%==================
+\section[Philosophy for Packet Dropout Compensation]{Philosophy for Control Packet Dropout Compensation}
+
+A queuing protocol has been developed in the last chapter for NCSs. Control packet dropout refers to the situation where, in a control period, no control packet is received by the actuator before the latest time instant to enqueue a control packet to queue~$Q_1$. 
+
+From the timelines in Figure (...... omitted ......) for the queuing protocol, it is seen that $T_L$ is the latest {\it possible} time instant to receive control packets without packet dropout. After this time instant, some control packets may not be delivered successfully. $T_L$ is also the cut-off, i.e., latest {\em allowable}, time instant for $Q_1$ to accept control packets in a control period. Even if some control packets can reach the actuator after this time instant, they are purposely dropped. 
+
+Before developing strategies to deal with control packet dropout, we would like to clarify the following two aspects, which are crucial for our development:
+\begin{enumerate}
+\parskip=0\baselineskip
+\item[1)] How much computing power and other resources are available for calculations of packet dropout compensation? and
+\item[2)] How much chance will various packet dropout scenarios likely occur? 
+\end{enumerate}
+
+...... More discussions are omitted here ......
+
+
+%==================
+\section[Mechanism for Packet Dropout Compensation]{Mechanism for Control Packet Dropout Compensation}
+
+For real-time networked control, having the mechanism to output control signals at a fixed time instant in the real-time queuing protocol leads to more predictive timing behaviour of the NCS. This compensates for time-varying network delay, but does not solve the problem of control packet dropout. What will happen if a control packet is not received by the actuator by the time instant $T_L$? In this case, $Q_1$ is empty and no control signal can be output to the plant. We need to ``make" a control signal! This is what we will investigate in detail in the next few sections.
+
+...... More discussions are omitted here ......

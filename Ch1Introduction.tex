@@ -1,0 +1,54 @@
+% Ch1Introduction.tex
+
+\chapter[Introduction]{Introduction}
+\label{cha:cha1Introduction}
+
+This is the introduction of the sample thesis template file. It shows how to use \LaTeX~pacage qutthesys.sty for writing a thesis at QUT. 
+
+%=============
+\section{Overview}
+
+A \LaTeX~style file, named qutthesis.sty, is developed, for writing PhD or Research Masters thesis. Developed by Associate Professor Yu-Chu Tian (Glen), it tries to fulfill QUT's Thesis requirements but it is unofficial. 
+    
+Copyright (C) 2010 by Yu-Chu Tian (Glen)
+                                                                      
+This style file is provided ``as is" without express or implied warranty. Permission is granted to PhD and Research Masters students for personal use on any computer systems, subject to the following restrictions:
+
+\begin{enumerate}  
+ \item The author is not responsible for the consequences of use of this style file.
+ \item Modification is allowed to this style file provided the modified version is marked as such. 
+ \item This notice is to remain intact.
+\end{enumerate}   
+    
+    The `qutthesis' option should be used as a package with the document class `report'. It defines many new commands and environments for easy use to the end users though many of those definitions are transparent to the end users. Also, it refines many existing commands and environments, such as chapter, section, subsection, table, table*, figure, figure*, etc., for better presentation. Again, many of such refinements are transparent to the end users. 
+    
+    \LaTeX~beginners may simply follow the sample files provided to prepare their theses. For advanced \LaTeX ~users, this style file would be a good start point for further refinement of the thesis presentation. 
+    
+    While all users are welcome to send me comments and suggestions for further improvement of the style file, feedback and technical support may not be expected from me due to limited resources.
+    
+%===============
+\section{Illustration of References and Citations} 
+
+References and citations are best handled in a consistent way by using BibTeX. In this method, you supply all the relevant information about references in a ``.bib file'' without regard to ordering or style. Then you let BibTeX format all citations and reference entries according to the chosen bibliographic style, and you don't have to sweat all the font and punctuation and ordering details yourself. 
+
+There are two basic types of citation styles: numerical and author-year. I personally prefer the author-year style in writing thesis because this style allowing us keep reading the text without having to frequently turn to the reference pages. 
+
+There are several author-year bibliography styles that have been popularly used. I used to use ``named'' package. This package is simple and easy to use. However, it does not now how to break a line for a long citation involving several references and thus often generate bad boxes when you typeset the documents. Actually, what I did before was to ignore such bad boxes in draft version, and to manually remove such boxes and refine the layout before generating the final version.  
+
+A more complicated author-year bibliography style is ``natbib''. There are many discussions on how to use this package. I do not intend to discuss how to use this package here; instead, I merely provide some examples of using this package. 
+
+Here is a citation example \citep{TianPLA07}; this paper was published by \citeauthor{TianPLA07} in \citeyear{TianPLA07}. 
+
+Another citation example is shown here \citep{PengIEEETFS10}.  \citet{TianPLA07} showed that a system can be well stabilised using a new method proposed from the fuzzy logic perspective. 
+
+These two papers \citep{TianPLA07,PengIEEETFS10} are only two examples taken from our long list of publications. Many more examples are here \citep{PengAML08,PengINS07,PengEJC06,TianINS07}. And even more are here \citep{Tian99,Tian98PhysicaD,TianIJCM07,TianINS07,TianJPC03}. 
+
+Our latest publication is \citep{PengIEEETSMCA11}. 
+
+%===================
+\section{Cross-Referencing of Appendices}
+
+Now the updated qutthesis.sty style file supports cross-referencing of appendices. This is an illustration of Appendix \ref{app:A} to show you how to cross-reference an appendix. A similar example is shown in Appendix \ref{app:B} with detailed explanations. 
+
+We are also be able to cross-reference equations and tables in appendices. For example, both Eq. (\ref{eqn:statespacemodel}) and Table \ref{tab:sim} are from Appendix \ref{app:A}.  From Appendix \ref{app:B}, we can find Eq. (\ref{eqn:output}) and Table \ref{tab:output}. 
+

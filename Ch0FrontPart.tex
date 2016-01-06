@@ -1,0 +1,82 @@
+% Part0FrontPart.tex
+
+%============frontmatter % Coverpage etc
+\title{Applying Enterprise Architecture to business networks}
+       
+\author{Mohammad Adel Rostamzadeh Bakhtiyari}
+\authoremail{yctian@ieee.org}
+\supervisor{ Professor Alistair Barros }
+\thesistype{Doctor of Philosophy}    % or comment it out (the default is Doctor of Philosophy)
+\university{Queensland University of Technology} % or comment it out (the default is QUT)
+\department{Science and Engineering Faculty}   % or comment it out (the default one is FaST)
+\lab{School of Information systems}   % or School of xxx xxx xxx 
+                         % or comment it out (the default one is Computer Science)                         
+\universitylogo{yes}{0.3}{./QUT.pdf}  % yes (true, 1) or no (false, 0), scale = 0.5; filename = QUTLogo.eps
+\submissiondate{March 2016}
+\copyrightyear{2016}
+\informationcutoffdate{01 March 2016} %for cut of date of information in the thesis
+
+\maketitle	   %cover page of the thesis; a blank page is automatically added for double-side printing
+
+\blankpage         %two more blank pages. If you don't want them, comment them out
+\blankpage
+\setcounter{page}{1} %start to count page numbers
+
+%\insidetitlepage   %if you don't like an insidetitle page, comment it out
+
+\copyrightpage     %another format available: \copyrightpageWithTitle. You may try it (with thesis title). 
+
+%\signaturepage\cleardoublepage   % you may not need this signature page, so comment it out
+
+%============dedication
+\begin{dedication}
+To my family 
+\end{dedication}
+
+%============abstract
+\begin{abstract}
+A \LaTeX~style file, named qutthesis.sty, is developed, for writing PhD or Research Masters thesis. Developed by Associate Professor Yu-Chu Tian (Glen), it tries to fulfill QUT's Thesis requirements but it is unofficial. 
+    
+Copyright (C) 2010 by Yu-Chu Tian (Glen)
+                                                                      
+This style file is provided ``as is" without express or implied warranty. Permission is granted to PhD and Research Masters students for personal use on any computer systems, subject to the following restrictions:
+
+\begin{enumerate}  
+ \item The author is not responsible for the consequences of use of this style file.
+ \item Modification is allowed to this style file provided the modified version is marked as such. 
+ \item This notice is to remain intact.
+\end{enumerate}   
+    
+    The `qutthesis' option should be used as a package with the document class `report'. It defines many new commands and environments for easy use to the end users though many of those definitions are transparent to the end users. Also, it refines many existing commands and environments, such as chapter, section, subsection, table, table*, figure, figure*, etc., for better presentation. Again, many of such refinements are transparent to the end users. 
+    
+    \LaTeX~beginners may simply follow the sample files provided to prepare their theses. For advanced \LaTeX ~users, this style file would be a good start point for further refinement of the thesis presentation. 
+    
+    While all users are welcome to send me comments and suggestions for further improvement of the style file, feedback and technical support may not be expected from me due to limited resources. 
+\end{abstract}
+
+%============keywords
+\begin{keywords}
+Thesis, QUT, \LaTeX, Template, Sample File 
+\end{keywords}
+
+%============acknowledgment
+\begin{ack}
+Here is the acknowledgment section. 
+\end{ack}
+
+
+%=============preface
+\begin{preface}
+Here is the preface. 
+
+\end{preface}
+
+
+%==============
+% If you don't like to put nomenclature, which you have manually 
+% edited in the file nomenclature.tex, at the front, comment the 
+% following line out
+\listnomenclatureatfront{yes}{./nomenclature.tex} 
+
+%==============
+\afterpreface
